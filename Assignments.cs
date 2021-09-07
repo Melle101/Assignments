@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace Assignments
 {
@@ -51,12 +52,12 @@ namespace Assignments
         }
         public static void Uppgift8()
         {
-            Console.Write("Please type in amount of seconds: ");;
-            double SecondsInput = double.Parse(Console.ReadLine()); //Ser till att inputen är av typ double
+            Console.Write("Please type in amount of seconds: ");
+            double SecondsInput = Double.Parse(Console.ReadLine().Replace(',', '.'), CultureInfo.InvariantCulture); // Ser till att både ',' och '.' fungerar som decimaltecken. 
             double Hours = SecondsInput / 3600;
             double Minutes = ((Hours - Math.Floor(Hours)) * 60);
             double Seconds = ((Minutes - Math.Floor(Minutes)) * 60);
-            Console.WriteLine($"{SecondsInput} Seconds is {Math.Floor(Hours)} Hours, {Math.Floor(Minutes)} Minutes and {Math.Round(Seconds)} Seconds!");
+            Console.WriteLine($"{SecondsInput} Seconds is {Math.Floor(Hours)} Hours, {Math.Floor(Minutes)} Minutes and {Math.Round(Seconds, 2)} Seconds!");
         }
 
 
