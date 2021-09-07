@@ -51,8 +51,8 @@ namespace Assignments
         }
         public static void Uppgift8()
         {
-            Console.Write("Please type in amount of seconds: ");
-            double SecondsInput = Double.Parse(Console.ReadLine());
+            Console.Write("Please type in amount of seconds: ");;
+            double SecondsInput = double.Parse(Console.ReadLine()); //Ser till att inputen är av typ double
             double Hours = SecondsInput / 3600;
             double Minutes = ((Hours - Math.Floor(Hours)) * 60);
             double Seconds = ((Minutes - Math.Floor(Minutes)) * 60);
@@ -60,5 +60,37 @@ namespace Assignments
         }
 
 
+    }
+
+    public class ProgSharpK2
+    {
+        public static void Uppgift201()
+        {
+            Console.Write("Var kommer du ifrån?: ");
+            string City = Console.ReadLine();
+            Console.Write("Vad är ditt drömresmål?:");
+            string DreamPlace = Console.ReadLine();
+            Console.WriteLine($"Hej {City}-bo, jag hoppas att du får åka till {DreamPlace}.");
+
+            Console.ReadKey();
+        }
+
+        public static void Uppgift202()
+        {
+            Console.Write("Vilket år är det?: ");
+            int Year = int.Parse(Console.ReadLine()) + 20;
+            Console.WriteLine($"Om 20 år är det år {Year}.");
+
+            Console.ReadKey();
+        }
+
+        public static void Uppgift203()
+        {
+            Console.Write("Hur högt kan du hoppa i meter?: ");
+            double HeightDiff = 2.45 - double.Parse(Console.ReadLine());
+            Console.WriteLine($"Du hoppar {HeightDiff} meter lägre än världsrekordet på 2,45 meter.");
+
+            Console.ReadKey();
+        }
     }
 }

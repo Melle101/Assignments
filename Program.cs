@@ -11,7 +11,7 @@ namespace Assignments
     {
         static void Main(string[] args)
         {
-            KaggVariabler.Uppgift8();
+            ProgSharpK2.Uppgift203(); 
            
             Console.ReadKey(); 
         }
