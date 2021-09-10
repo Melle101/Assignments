@@ -4,6 +4,7 @@
 Uppgifter i Assignments.cs använd t.ex KaggVariabler.Uppgift1(); för att köra uppgift.
 Nuvarande klasser: 
 'KaggVariabler' med uppgifter 1-8
+'ProgSharpK2' 
 */
 namespace Assignments
 {
@@ -11,10 +12,9 @@ namespace Assignments
     {
         static void Main(string[] args)
         {
-            ProgSharpK2.Uppgift203(); 
+            ProgSharpK2.Uppgift205(); 
            
             Console.ReadKey(); 
-        }
-
+        }  
     }
 }

@@ -92,5 +92,22 @@ namespace Assignments
 
             Console.ReadKey();
         }
+        
+        public static void Uppgift204()
+        {
+            Console.Write("Välj det första talet: ");
+            double Number1 = double.Parse(Console.ReadLine());
+            Console.Write("Välj det andra talet: ");
+            double Number2 = double.Parse(Console.ReadLine());
+            double Sum = Number1 + Number2;
+            Console.WriteLine($"Summan av talen är {Sum}.");
+        }
+        public static void Uppgift205()
+        {
+            Console.Write("Vilket år är det?: ");
+            int CurrentYear = int.Parse(Console.ReadLine());
+            int YearsLeft = 2100 - CurrentYear;
+            Console.WriteLine($"Det är {YearsLeft} år kvar till 2100.");
+        }
     }
 }
