@@ -60,7 +60,6 @@ namespace Assignments
             Console.WriteLine($"{SecondsInput} Seconds is {Math.Floor(Hours)} Hours, {Math.Floor(Minutes)} Minutes and {Math.Round(Seconds, 2)} Seconds!");
         }
 
-
     }
 
     public class ProgSharpK2
@@ -109,6 +108,60 @@ namespace Assignments
             int CurrentYear = int.Parse(Console.ReadLine());
             int YearsLeft = 2100 - CurrentYear;
             Console.WriteLine($"Det är {YearsLeft} år kvar till 2100.");
+        }
+        public static void Uppgift206()
+        {
+            Console.Write("Ange tal ett: ");
+            double Number1 = double.Parse(Console.ReadLine());
+            Console.Write("Ange tal två: ");
+            double Number2 = double.Parse(Console.ReadLine());
+            double Average = (Number1 + Number2) / 2;
+            Console.WriteLine($"Medelvärdet av {Number1} och {Number2} är {Average}.");
+        }
+        public static void Uppgift207()
+        {
+            Console.Write("Skriv en mening av två ord utan punkt: ");
+            string UserSentence = Console.ReadLine();
+            string FirstWord = UserSentence[..UserSentence.IndexOf(" ")];
+            string LastWord = UserSentence[(UserSentence.IndexOf(" ")+1)..];
+            Console.Write(LastWord + " " + FirstWord);
+        }
+        public static void Uppgift208()
+        {
+            Console.Write("Skriv ett matteproblem med två variabler utan mellanslag: ");
+            string Problem = Console.ReadLine();
+            if (Problem.Contains("*"))
+            {
+                double Variable1 = double.Parse(Problem[..Problem.IndexOf("*")]);
+                double Variable2 = double.Parse(Problem[(Problem.IndexOf("*") + 1)..]);
+                double Answer = Variable1 * Variable2;
+                Console.WriteLine($"Svaret är {Answer}");
+            }
+            else if (Problem.Contains("/"))
+            {
+                double Variable1 = double.Parse(Problem[..Problem.IndexOf("/")]);
+                double Variable2 = double.Parse(Problem[(Problem.IndexOf("/") + 1)..]);
+                double Answer = Variable1 / Variable2;
+                Console.WriteLine($"Svaret är {Answer}");
+            }
+            else if (Problem.Contains("+"))
+            {
+                double Variable1 = double.Parse(Problem[..Problem.IndexOf("+")]);
+                double Variable2 = double.Parse(Problem[(Problem.IndexOf("+") + 1)..]);
+                double Answer = Variable1 + Variable2;
+                Console.WriteLine($"Svaret är {Answer}");
+            }
+            else if (Problem.Contains("-"))
+            {
+                double Variable1 = double.Parse(Problem[..Problem.IndexOf("-")]);
+                double Variable2 = double.Parse(Problem[(Problem.IndexOf("-") + 1)..]);
+                double Answer = Variable1 - Variable2;
+                Console.WriteLine($"Svaret är {Answer}");
+            }
+            else
+            {
+                Console.WriteLine("Glöm inte ett räknesätt. :(");
+            }
         }
     }
 }
