@@ -163,5 +163,10 @@ namespace Assignments
                 Console.WriteLine("Glöm inte ett räknesätt. :(");
             }
         }
+        public static void Uppgift209()
+        {
+            Console.Write("Vad heter du?: ");
+            Console.Write($"Hej, {Console.ReadLine()}");
+        }
     }
 }
