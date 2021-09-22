@@ -276,4 +276,203 @@ namespace Assignments
             Console.Write($"Hej, {Console.ReadLine()}");
         }
     }
+    class ProgSharpK3
+    {
+        public static void Uppgift301()
+        {
+            Console.Write("Hur gammal är du?: ");
+            int ålder = int.Parse(Console.ReadLine());
+
+            if (ålder >= 50)
+            {
+                Console.WriteLine("Du får vara med i senior golfen!");
+            }
+            else
+            {
+                Console.WriteLine("Du får inte vara med i senior golfen! :(");
+            }
+        }
+        public static void Uppgift302()
+        {
+            Console.Write("Vilket land vann VM i damfotboll 2015): ");
+            string Answer = Console.ReadLine().ToLower();
+            if (Answer == "usa")
+            {
+                Console.WriteLine("Rätt!");
+            }
+            else
+            {
+                Console.WriteLine("Fel! :(");
+            }
+        }
+        public static void Uppgift303()
+        {
+            Console.Write("Vad heter du?: ");
+            string Name = Console.ReadLine();
+            if (Name == "Stig")
+            {
+                Console.WriteLine("Du har namnsdag idag!");
+            }
+            else if (Name == "Abraham")
+            {
+                Console.WriteLine("Du har namnsdag imorgon"!);
+            }
+            else
+            {
+                Console.WriteLine("Du har varken namnsdag idag eller imorgon.");
+            }
+        }
+
+        public static void Uppgift304()
+        {
+            Console.Write("Hur mycket poäng fick du?: ");
+            int Score = int.Parse(Console.ReadLine());
+            if (Score >= 55)
+            {
+                Console.WriteLine("Du fick ett A!");
+            }
+            else if (Score >= 46)
+            {
+                Console.WriteLine("Du fick ett B!");
+            }
+            else if (Score >= 35)
+            {
+                Console.WriteLine("Du fick ett C!");
+            }
+            else if (Score >= 27)
+            {
+                Console.WriteLine("Du fick ett D!");
+            }
+            else if (Score > 18)
+            {
+                Console.WriteLine("Du fick ett E!");
+            }
+            else
+            {
+                Console.WriteLine("Du fick ett F. :(");
+            }
+        }
+        public static void Uppgift305()
+        {
+            Console.Write("Hur gammal är du? Svara i år: ");
+            int Age = int.Parse(Console.ReadLine());
+            Console.Write("Hur mycket tjänar du i månaden? Svara i kronor: ");
+            int Salary = int.Parse(Console.ReadLine());
+            if (Age < 39)
+            {
+                if (Salary <= 36100)
+                {
+                    Console.WriteLine("Du är yngre än medelåldern och tjänar mindre än medellönen.");
+                }
+                if (Salary == 36100)
+                {
+                    Console.WriteLine("Du är yngre än medelåldern och tjänar lika mycket som medellönen.");
+                }
+                if (Salary >= 36100)
+                {
+                    Console.WriteLine("Du är yngre än medelåldern och tjänar mer än medellönen.");
+                }
+            }
+            else if (Age == 39)
+            {
+                if (Salary <= 36100)
+                {
+                    Console.WriteLine("Du lika gammal som medelåldern och tjänar mindre än medellönen.");
+                }
+                if (Salary == 36100)
+                {
+                    Console.WriteLine("Du lika gammal som medelåldern och tjänar lika mycket som medellönen.");
+                }
+                if (Salary >= 36100)
+                {
+                    Console.WriteLine("Du lika gammal som medelåldern och tjänar mer än medellönen.");
+                }
+            }
+            else if (Age > 39)
+            {
+                if (Salary <= 36100)
+                {
+                    Console.WriteLine("Du är äldre än medelåldern och tjänar mindre än medellönen.");
+                }
+                if (Salary == 36100)
+                {
+                    Console.WriteLine("Du är äldre än medelåldern och tjänar lika mycket som medellönen.");
+                }
+                if (Salary >= 36100)
+                {
+                    Console.WriteLine("Du är äldre än medelåldern och tjänar mer än medellönen.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Något blev fel. :(");
+            }
+        }
+        public static void Uppgift306()
+        {
+            Console.Write("Hur lång är du? Svara i meter: ");
+            double Height = double.Parse(Console.ReadLine());
+
+            if (Height >= 1.5 && Height <= 1.9)
+            {
+                Console.WriteLine("Grattis, du får åka berg-och-dalbanan!");
+            }
+            else
+            {
+                Console.WriteLine("Tyvärr, du får inte åka berg-och-dalbanan.");
+            }
+        }
+        public static void Uppgift307()
+        {
+            Console.Write("Hur gammal är du?Svara i år: ");
+            int Age = int.Parse(Console.ReadLine());
+            if ((Age >= 10 && Age <= 18) || Age >= 65)
+            {
+                Console.WriteLine("Du får rabatt!");
+            }
+            else
+            {
+                Console.WriteLine("Du får inte rabatt!");
+            }
+        }
+        public static void Uppgift308()
+        {
+            Console.Write("Skriv ord ett: ");
+            string Word1 = Console.ReadLine();
+            Console.Write("Skriv ord två: ");
+            string Word2 = Console.ReadLine();
+            Console.Write("Skriv ord tre: ");
+            string Word3 = Console.ReadLine();
+
+            if (Word1.CompareTo(Word2) < 0 && Word1.CompareTo(Word3) < 0)
+            {
+                Console.WriteLine("Det första ordet kommer först i bokstavsordning.");
+            }
+        }
+        public static void Uppgift309()
+        {
+            Console.Write("Skriv en sträng: ");
+            string Input = Console.ReadLine();
+
+            if (Input.Contains("+"))
+            {
+                if (Input.Contains("-"))
+                {
+                    Console.WriteLine("Strängen innehåller både + och -.");
+                }
+                else
+                {
+                    Console.WriteLine("Strängen innehåller ett +.");
+                }
+            }
+            else if (Input.Contains("-"))
+            {
+                Console.WriteLine("Strängen innehåller ett -.");
+            }
+            else
+            {
+                Console.WriteLine("Strängen innehåller varken ett + eller -");
+            }
+        }
+    }
 }
