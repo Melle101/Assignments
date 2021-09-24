@@ -474,5 +474,84 @@ namespace Assignments
                 Console.WriteLine("Strängen innehåller varken ett + eller -");
             }
         }
+        public static void Uppgift310()
+        {
+            Console.Write("Vilken plats kom du i idrottsturneringen?: ");
+            int Placement = int.Parse(Console.ReadLine());
+
+            switch (Placement)
+            {
+                case 1:
+                    Console.WriteLine("Grattis, du fick guld!");
+                    break;
+                case 2:
+                    Console.WriteLine("Grattis, du fick silver!");
+                    break;
+                case 3:
+                    Console.WriteLine("Grattis, du fick brons.");
+                    break;
+                default:
+                    Console.WriteLine("Du fick ingen medalj.");
+                    break;
+            }
+        }
+        public static void Uppgift311()
+        {
+            Console.WriteLine("Välj ett ämne: \n1. Musik \n2. Geografi \n3. Historia");
+            string Choice = Console.ReadLine();
+
+            switch (Choice)
+            {
+                case "1":
+                    Console.Write("Musik: Vilket år dog Michael Jackson?: ");
+                    int Answer1 = int.Parse(Console.ReadLine());
+                    switch (Answer1)
+                    {
+                        case 2009:
+                            Console.WriteLine("Rätt Svar!");
+                            break;
+                        default:
+                            Console.WriteLine("Fel!");
+                            break;
+                    }
+                    break;
+                case "2":
+                    Console.Write("Geografi: På vilken kontinent ligger Kina?: ");
+                    string Answer2 = Console.ReadLine();
+                    switch (Answer2)
+                    {
+                        case "Asien":
+                            Console.WriteLine("Rätt Svar!");
+                            break;
+                        default:
+                            Console.WriteLine("Fel!");
+                            break;
+                    }
+                    break;
+                case "3":
+                    Console.Write("Historia: Vilket år blev Gustav Vasa kung? ");
+                    int Answer3 = int.Parse(Console.ReadLine());
+                    switch (Answer3)
+                    {
+                        case 1523:
+                            Console.WriteLine("Rätt Svar!");
+                            break;
+                        default:
+                            Console.WriteLine("Fel!");
+                            break;
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Skriv en siffra, 1-3.");
+                    break;
+            }
+        }
+        public static void Uppgift312()
+        {
+            Console.Write("Hur många datorer har du?: ");
+            int Amount = int.Parse(Console.ReadLine());
+            string Conjuction = Amount == 1 ? "dator" : "datorer";
+            Console.Write($"Du har {Amount} {Conjuction}.");
+        }
     }
 }

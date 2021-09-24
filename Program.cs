@@ -13,7 +13,7 @@ namespace Assignments
     {
         static void Main(string[] args)
         {
-            ProgSharpK3.Uppgift308(); 
+            ProgSharpK3.Uppgift312(); 
            
             Console.ReadKey(); 
         }  
