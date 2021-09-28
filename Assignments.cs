@@ -646,7 +646,7 @@ namespace Assignments
             int Sum = 0;
             for (int i = 0; i < Numbers.ToString().Length; i++)
             {
-                Sum += Numbers[i];
+                Sum += int.Parse(Numbers[i].ToString());
             }
             Console.WriteLine(Sum);
         }
