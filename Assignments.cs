@@ -539,7 +539,7 @@ namespace Assignments
                         default:
                             Console.WriteLine("Fel!");
                             break;
-                    }
+                    } 
                     break;
                 default:
                     Console.WriteLine("Skriv en siffra, 1-3.");
@@ -551,7 +551,105 @@ namespace Assignments
             Console.Write("Hur många datorer har du?: ");
             int Amount = int.Parse(Console.ReadLine());
             string Conjuction = Amount == 1 ? "dator" : "datorer";
-            Console.Write($"Du har {Amount} {Conjuction}.");
+            Console.Write($"Du har {Amount} {Conjuction}."); 
         }
+        public static void Uppgift321()
+        {
+            Console.Write("Skriv ett uttryck med ett eller två plustecken: ");
+            string Problem = Console.ReadLine();
+            int FirstIndex = Problem.IndexOf("+");
+            int SecondIndex = FirstIndex + 1 + Problem[(FirstIndex+1)..].IndexOf("+");
+            if (FirstIndex == SecondIndex) SecondIndex = Problem.Length;
+            double Term1 = double.Parse(Problem[..FirstIndex]);
+            double Term2 = double.Parse(Problem[FirstIndex..SecondIndex]);
+            double Term3 = 0;
+            if ((SecondIndex + 1) <= Problem.Length) Term3 = double.Parse(Problem[(SecondIndex + 1)..]);
+            Console.WriteLine($"Svaret är: {Term1 + Term2 + Term3}");
+        }
+    }
+    class ProgSharpK4
+    {
+        public static void Uppgift401()
+        {
+            string Answer = "";
+            Console.WriteLine("Vilket är världens folkrikaste land?: ");
+            while (Answer != "kina")
+            {
+                Console.Write("Ditt svar: ");
+                Answer = Console.ReadLine().ToLower();
+            }
+            Console.WriteLine("Rätt!");
+        }
+        public static void Uppgift402()
+        {
+            int Number = 50;
+            while (Number > 0)
+            {
+                Console.WriteLine(Number);
+                Number--;
+            }
+        }
+        public static void Uppgift403()
+        {
+            int Choice = 0;
+            
+            while (Choice != 3)
+            {
+                Console.WriteLine("\nVälj ett av följande alternativ. \n1. Omvandla meter till kilometer. \n2. Omvandla kilometer till meter. \n3. Avsulta programmet.");
+                Choice = int.Parse(Console.ReadLine());
+                switch (Choice)
+                {
+                    case 1:
+                        Console.Write("Skriv antal meter:");
+                        Console.WriteLine((double.Parse(Console.ReadLine()) / 1000));
+                        break;
+                    case 2:
+                        Console.Write("Skriv antal kilometer:");
+                        Console.WriteLine((double.Parse(Console.ReadLine()) * 1000));
+                        break;
+                    case 3:
+                        Console.WriteLine("Programmet avslutas.");
+                        break;
+                    default:
+                        Console.WriteLine("Skriv ett giltligt nummer.");
+                        break;
+                }
+            }
+        }
+        public static void Uppgift404()
+        {
+            for (int i = 40; i <= 80; i++)
+            {
+                Console.WriteLine(i);
+            }
+        }
+        public static void Uppgift405()
+        {
+            for (int year = 1495; year >= 1400; year -= 5)
+            {
+                Console.WriteLine(year);
+            }
+        }
+        public static void Uppgift406()
+        {
+            Console.Write("Skriv ett ord:");
+            string Message = Console.ReadLine();
+            for (int i = Message.Length; i > 0; i--)
+            {
+                Console.WriteLine(Message[i-1]);
+            }
+        }
+        public static void Uppgift407()
+        {
+            Console.Write("Skriv en rad siffror: ");
+            string Numbers = Console.ReadLine();
+            int Sum = 0;
+            for (int i = 0; i < Numbers.ToString().Length; i++)
+            {
+                Sum += Numbers[i];
+            }
+            Console.WriteLine(Sum);
+        }
+        
     }
 }
