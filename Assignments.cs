@@ -650,6 +650,89 @@ namespace Assignments
             }
             Console.WriteLine(Sum);
         }
-        
+        public static void Uppgift408()
+        {
+            Console.Write("Skriv ett tal: ");
+            string Number = Console.ReadLine();
+            bool NumberContain = Number.Contains("3") || Number.Contains("7");
+            if (NumberContain)
+            {
+                Console.WriteLine("Talet innehåller 3 eller 7.");
+            }
+            else
+            {
+                Console.WriteLine("Talet innehåller varken 3 eller 7.");
+            }
+        }
+        public static void Uppgift409()
+        {
+            Console.Write("Hur många kvadrattal?: ");
+            int x = int.Parse(Console.ReadLine()) + 1;
+            for (int i = 1;  i < x; i++)
+            {
+                Console.WriteLine($"{i} * {i} = {i * i}");
+            }
+        }
+        public static void Uppgift410()
+        {
+            for (int i = 1; i <= 30; i++)
+            {
+                if (i == 12 || i == 27)
+                {
+                    continue;
+                }
+                Console.WriteLine(i);
+            }
+        }
+        public static void Uppgift411()
+        {
+            Console.WriteLine("Vilket är Europas folkrikaste land?: ");
+            for (int i = 0; i < 5; i++)
+            {
+                Console.Write("Ditt Svar: ");
+                string Answer = Console.ReadLine().ToLower();
+                if (Answer == "kina")
+                {
+                    Console.WriteLine("Rätt!");
+                    break;
+                }
+                Console.Write("Fel!");
+            }
+        }
+        public static void Uppgift412()
+        {
+                for (int u = 1; u < 7; u++)
+                {
+                    Console.WriteLine($"{u} {u * 2} {u * 3} {u * 4} {u*5} {u*6}");
+                }
+        }
+        public static void Uppgift413()
+        {
+            Console.Write("Välj höjd: ");
+            int Height = int.Parse(Console.ReadLine());
+            Console.Write("Välj bredd: ");
+            int Width = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < Height; i++)
+            {
+                if (i == 0 || i == Height - 1)
+                {
+                    Console.
+                    for (int u = 0; u < Width; u++)
+                    {
+                        Console.Write("X");
+                    }
+                }
+                else
+                {
+                    Console.Write("X");
+                    for (int v = 0; v < Width - 2; v++)
+                    {
+                        Console.Write(" ");
+                    }
+                    Console.Write("X");
+                }
+            }
+        }
     }
 }
