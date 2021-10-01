@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
+using System.Threading;
 
 namespace Assignments
 {
@@ -717,7 +718,7 @@ namespace Assignments
             {
                 if (i == 0 || i == Height - 1)
                 {
-                    Console.
+                    Console.WriteLine("");
                     for (int u = 0; u < Width; u++)
                     {
                         Console.Write("X");
@@ -733,6 +734,169 @@ namespace Assignments
                     Console.Write("X");
                 }
             }
+        }
+        public static void Uppgift414()
+        {
+            Console.Write("Skriv ett ord: ");
+            string Word = Console.ReadLine();
+
+            for (char i = (char)0; i <= 256; i++)
+            {
+                int Freq = 0; //Amount of '\' in RowInput
+                foreach (char c in Word)
+                {
+                    if (c == i) Freq++;
+                }
+                if (Freq > 1)
+                {
+                    Console.WriteLine($"Teckent {i} förekommer {Freq} gånger");
+                }
+            }
+        }
+        public static void Uppgift415()
+        {
+            string Message = "Hej! Är 3,14 ett heltal? Tack, för att du, läste meddelandet.";
+            for (int i = 0; i < Message.Length; i++)
+            {
+                Console.Write(Message[i]);
+                if (Message[i] == '.' || Message[i] == '!' || Message[i] == '?' || Message[i] == ',')
+                {
+                    Thread.Sleep(750);
+                }
+                else
+                {
+                    Thread.Sleep(50);
+                }
+            }
+        }
+        public static void Uppgift416()
+        {
+            string Message = "Hej! Är 3,14 ett heltal? Tack, för att du, läste meddelandet.";
+            for (int i = 0; i < Message.Length; i++)
+            {
+                Console.Write(Message[i]);
+                if (Message[i] == '.' || Message[i] == '!' || Message[i] == '?' || (Message[i] == ',' && Message[i + 1] == ' '))
+                {
+                    Thread.Sleep(750);
+                }
+                else
+                {
+                    Thread.Sleep(50);
+                }
+            }
+        }
+        public static void Uppgift417()
+        {
+            string Word = "Hello";
+            string Word2 = Word[-1..];
+        }
+        public static void Uppgift418()
+        {
+            int x = int.Parse("x");
+        }
+        public static void Uppgift419()
+        {
+            Console.WriteLine("Detta program har en loop");
+            Console.WriteLine("Loopen räknar ut summan av talen 0 till 4");
+            int summa = 0;
+
+            for (int i = 0; i < 5; i++)
+            {
+                Console.WriteLine("Nu skrivs värdet av i ut");
+                Console.WriteLine($"i = {i}");
+                // Öka summa-variabeln med värdet av i
+                summa += i;
+            }
+
+            Console.WriteLine($"Summan av talen är {summa}");
+        }
+        public static void Uppgift430()
+        {
+            Console.Write("Hur många O per grupp?: ");
+            int Os = int.Parse(Console.ReadLine());
+            Console.Write("Hur många X per grupp?: ");
+            int Xs = int.Parse(Console.ReadLine());
+            Console.Write("Hur många O grupper?: ");
+            int OGroups = int.Parse(Console.ReadLine());
+            Console.Write("Hur många rader??: ");
+            int Rows = int.Parse(Console.ReadLine());
+
+            for (int r = 0; r < Rows; r++)
+            {
+                for (int og = 0; og < OGroups; og++)
+                {
+                    for (int x = 0; x < Xs; x++)
+                    {
+                        Console.Write("X");
+                    }
+                    Console.Write("-");
+                    for (int o = 0; o < Os; o++)
+                    {
+                        Console.Write("O");
+                    }
+                    Console.Write("-");
+                }
+                for (int x = 0; x < Xs; x++)
+                {
+                    Console.Write("X");
+                }
+                Console.WriteLine();
+            }
+        }
+        public static void Uppgift432()
+        {
+            Console.Write("Bestäm kvadratens sidlängd: ");
+            int Side = int.Parse(Console.ReadLine());
+            Console.Write("Bestäm rutnätets bredd: ");
+            int Width = int.Parse(Console.ReadLine());
+            Console.Write("Bestäm rutnätets höjd: ");
+            int Height = int.Parse(Console.ReadLine());
+
+            for (int h = 0; h < Height; h++)
+            {
+                for (int k = 0; k < Side; k++)
+                {
+                    for (int j = 0; j < Width; j++)
+                    {
+                        for (int i = 0; i < Side; i++)
+                        {
+                            Console.Write("*");
+                        }
+                        Console.Write(" ");
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
+            }
+        }
+        public static void Uppgift433()
+        {
+            Console.Write("Ange ord ett: ");
+            string Word1 = Console.ReadLine();
+            Console.Write("Ange ord två: ");
+            string Word2 = Console.ReadLine();
+
+            int Freq1 = 0;
+            int Freq2 = 0;
+            string Output = "";
+
+            for (char i = (char)0; i <= 256; i++)
+            {
+
+                foreach (char c in Word1)
+                {
+                    if (c == i) Freq1++;
+                }
+                foreach (char c in Word2)
+                {
+                    if (c == i) Freq2++;
+                }
+                if (Freq1 > Freq2)
+                {
+                    Output += i;
+                }
+            }
+            Console.WriteLine(Output);
         }
     }
 }
