@@ -875,14 +875,11 @@ namespace Assignments
             string Word1 = Console.ReadLine();
             Console.Write("Ange ord två: ");
             string Word2 = Console.ReadLine();
-
-            int Freq1 = 0;
-            int Freq2 = 0;
             string Output = "";
-
             for (char i = (char)0; i <= 256; i++)
             {
-
+                int Freq1 = 0;
+                int Freq2 = 0;
                 foreach (char c in Word1)
                 {
                     if (c == i) Freq1++;
@@ -897,6 +894,10 @@ namespace Assignments
                 }
             }
             Console.WriteLine(Output);
+        }
+        public static void Projekt1()
+        {
+
         }
     }
 }
