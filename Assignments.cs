@@ -820,6 +820,23 @@ namespace Assignments
                 else Console.WriteLine(i);
             }
         }
+        public static void Uppgift426()
+        {
+            Console.WriteLine("Skriv in ett tal: ");
+            string input = Console.ReadLine();
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (int.Parse(input[i].ToString()) == 9)
+                {
+                    Console.Write(0);
+                }
+                else
+                {
+                    Console.Write(int.Parse(input[i].ToString()) + 1); 
+                }
+            }
+        }
         public static void Uppgift430()
         {
             Console.Write("Hur många O per grupp?: ");
@@ -907,7 +924,7 @@ namespace Assignments
         }
         public static void Projekt1()
         {
-
+            
         }
     }
 }
