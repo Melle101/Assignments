@@ -822,7 +822,7 @@ namespace Assignments
         }
         public static void Uppgift426()
         {
-            Console.WriteLine("Skriv in ett tal: ");
+            Console.Write("Skriv in ett tal: ");
             string input = Console.ReadLine();
 
             for (int i = 0; i < input.Length; i++)
