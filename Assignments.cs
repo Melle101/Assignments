@@ -901,15 +901,15 @@ namespace Assignments
             {
                 int Freq1 = 0;
                 int Freq2 = 0;
-                foreach (char c in Word1)
+                foreach (char c in Word1) //Counts char c in word 1
                 {
                     if (c == i) Freq1++;
                 }
-                foreach (char c in Word2)
+                foreach (char c in Word2) //Counts char c in word 2
                 {
                     if (c == i) Freq2++;
                 }
-                if (Freq1 > Freq2)
+                if (Freq1 > Freq2) //Om det finns fler char c i word 1 än word 2, lägg till char c i output strängen. 
                 {
                     Output += i;
                 }
