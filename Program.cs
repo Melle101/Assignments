@@ -13,7 +13,7 @@ namespace Assignments
     {
         static void Main(string[] args)
         {
-            ProgSharpK4.Uppgift426(); 
+            Other.Kroppkakeuppgiften(); 
            
             Console.ReadKey(); 
         }  

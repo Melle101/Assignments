@@ -901,24 +901,42 @@ namespace Assignments
             {
                 int Freq1 = 0;
                 int Freq2 = 0;
-                foreach (char c in Word1)
+                foreach (char c in Word1) //Counts char c in word 1
                 {
                     if (c == i) Freq1++;
                 }
-                foreach (char c in Word2)
+                foreach (char c in Word2) //Counts char c in word 2
                 {
                     if (c == i) Freq2++;
                 }
-                if (Freq1 > Freq2)
+                if (Freq1 > Freq2) //Om det finns fler char c i word 1 än word 2, lägg till char c i output strängen. 
                 {
                     Output += i;
                 }
             }
             Console.WriteLine(Output);
         }
-        public static void Projekt1()
+    }
+    class Other
+    {
+        public static void Kroppkakeuppgiften()
         {
-            
+            Console.WriteLine("Välj en maträtt: \n1. Kroppkakor \n2. Ugnspannkaka \n3. Ostkaka");
+            int Meal = int.Parse(Console.ReadLine());
+            Console.WriteLine("Välj tillbehör: \n1. Lingonsylt \n2. Jordgubbssylt");
+            int Extra = int.Parse(Console.ReadLine());
+            if ((Meal == 1 && Extra == 1) || (Meal == 2) || (Meal == 3 && Meal == 2))
+            {
+                Console.Write("Du har valt en bra kombination!");
+            }
+            else if (Meal >= 1 && Meal <= 3 && Extra >= 1 && Extra <= 2)
+            {
+                Console.Write("Du har valt en dålig kombination.");
+            }
+            else
+            {
+                Console.WriteLine("Skriv giltliga siffror.");
+            }
         }
     }
 }
