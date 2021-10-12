@@ -938,5 +938,17 @@ namespace Assignments
                 Console.WriteLine("Skriv giltliga siffror.");
             }
         }
+        public static void Average()
+        {
+            double sum = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                Console.Write("Skriv ett tal: ");
+                double input = double.Parse(Console.ReadLine());
+                sum += input;
+            }
+            Console.WriteLine($"Medelvärdet är {sum / 10}.");
+        }
     }
 }
+ 
