@@ -864,6 +864,33 @@ namespace Assignments
                 Console.WriteLine();
             }
         }
+        public static void Uppgift431()
+        {
+            Console.Write("Ange ett ord: ");
+            string Word = Console.ReadLine();
+            bool AtleastOneTrueCase = false;
+
+            for (int i = 0; i < Word.Length; i++)
+            {
+                int Freq = 0;
+                for (int j = 0; j < Word.Length; j++)
+                {                
+                    if (Word[i] == Word[j])
+                    {
+                        Freq++;
+                    }                    
+                }
+                if (i == Word.IndexOf(Char.ToString(Word[i])) && Freq > 1) //Kollar om det är första gången Word[i] kollas samt om den förekommer fler än en gång.
+                {
+                    AtleastOneTrueCase = true; //Om minst en bokstav har förekommit fler än en gång så kommer detta förbli true
+                    Console.WriteLine($"{Word[i]} förekommer {Freq} gånger");
+                }
+            }
+            if (AtleastOneTrueCase != true)
+            {
+                Console.Write("Ingen bokstav förekommer fler än en gång.");
+            }
+        }
         public static void Uppgift432()
         {
             Console.Write("Bestäm kvadratens sidlängd: ");
