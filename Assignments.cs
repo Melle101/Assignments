@@ -976,6 +976,86 @@ namespace Assignments
             }
             Console.WriteLine($"Medelvärdet är {sum / 10}.");
         }
+        public static void RandomArray()
+        {
+            int?[] arr = new int?[9];
+            for (int i = 0; i < 9; i++)
+            {
+                while (arr[i] == null)
+                {
+                    int k = new Random().Next(1, 10);
+                    if ((Array.Exists(arr, element => element == k)) == false)
+                    {
+                        arr[i] = k;
+                        Console.WriteLine(arr[i].ToString());
+                    }
+                }
+            }
+        }
+        public static void SodokuFillTest()
+        {
+            int?[,] SolvedBoard = new int?[9, 9];
+
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    int?[] RandomArray = new int?[9]; //Skapar en array mellan 0-8 med siffrorna 1-9 i slumpad ordning.
+                    for (int k = 0; k < 9; k++)
+                    {
+                        while (RandomArray[k] == null)
+                        {
+                            int l = new Random().Next(1, 10);
+                            if ((Array.Exists(RandomArray, element => element == l)) == false)
+                            {
+                                RandomArray[k] = l;
+                                
+                            }
+                        }
+                    }
+
+                    bool NumberFound = false;
+                    int m = 0;
+                    while (NumberFound == false)
+                    {
+                        bool RowClear = false;
+                        bool ColumnClear = false;
+                        bool SquareClear = false;
+                        Console.Write(RandomArray[m]);
+                        Thread.Sleep(50);
+
+                        for (int l = 0; l < 9; l++) //Kolla så raden inte innehåller det möjliga värdet för cellen.
+                        {
+                            if ((RandomArray[m] == SolvedBoard[i, l]) == false)
+                            {
+                                RowClear = true; 
+                            }
+                        }
+                        for (int l = 0; l < 9; l++) //Kolla så kolumnen inte innehåller det möjliga värdet för cellen.
+                        {
+                            if ((RandomArray[m] == SolvedBoard[l, j]) == false)
+                            {
+                                ColumnClear = true;
+                            }
+                        }
+                        
+                        
+                        
+
+                        if (RowClear && ColumnClear)
+                        {
+                            NumberFound = true;
+                            SolvedBoard[i, j] = RandomArray[m];
+                        }
+                        m++;
+                    }
+                    
+
+                }
+                Console.WriteLine("-----------");
+            }
+        }
     }
 }
+                
  
