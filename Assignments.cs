@@ -976,6 +976,24 @@ namespace Assignments
             }
             Console.WriteLine($"Medelvärdet är {sum / 10}.");
         }
+        public static void RandomArray()
+        {
+            int?[] arr = new int?[9];
+            for (int i = 0; i < 9; i++)
+            {
+                while (arr[i] == null)
+                {
+                    int k = new Random().Next(1, 10);
+                    if ((Array.Exists(arr, element => element == k)) == false)
+                    {
+                        arr[i] = k;
+                        Console.WriteLine(arr[i].ToString());
+                    }
+                }
+            }
+            
+        }
     }
 }
+                
  
