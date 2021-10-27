@@ -1018,34 +1018,39 @@ namespace Assignments
                     int m = 0;
                     while (NumberFound == false)
                     {
-                        bool RowClear = false;
-                        bool ColumnClear = false;
+                        int o = 0;
+                        int n = 0;
                         bool SquareClear = false;
                         Console.Write(RandomArray[m]);
                         Thread.Sleep(50);
+
 
                         for (int l = 0; l < 9; l++) //Kolla så raden inte innehåller det möjliga värdet för cellen.
                         {
                             if ((RandomArray[m] == SolvedBoard[i, l]) == false)
                             {
-                                RowClear = true; 
+                                n++; 
                             }
                         }
+
                         for (int l = 0; l < 9; l++) //Kolla så kolumnen inte innehåller det möjliga värdet för cellen.
                         {
+                            
                             if ((RandomArray[m] == SolvedBoard[l, j]) == false)
                             {
-                                ColumnClear = true;
+                                o++;
                             }
                         }
                         
                         
                         
 
-                        if (RowClear && ColumnClear)
+                        if (o == 9 && n == 9)
                         {
                             NumberFound = true;
                             SolvedBoard[i, j] = RandomArray[m];
+                            Console.Write("Clear");
+                            Console.WriteLine(SolvedBoard[i, j]);
                         }
                         m++;
                     }
