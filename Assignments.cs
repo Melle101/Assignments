@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
 using System.Threading;
+using System.Diagnostics;
+using System.IO;
 
 namespace Assignments
 {
@@ -992,7 +994,7 @@ namespace Assignments
                 }
             }
         }
-        public static void SodokuFillTest()
+        public static void SodokuFillTest() //Kollar bara row och column men tar alldeles för lång tid mot slutet så inte värt att använda detta sättet, gör klart det någon gång senare. 
         {
             int?[,] SolvedBoard = new int?[9, 9];
 
@@ -1000,51 +1002,45 @@ namespace Assignments
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    int?[] RandomArray = new int?[9]; //Skapar en array mellan 0-8 med siffrorna 1-9 i slumpad ordning.
-                    for (int k = 0; k < 9; k++)
-                    {
-                        while (RandomArray[k] == null)
-                        {
-                            int l = new Random().Next(1, 10);
-                            if ((Array.Exists(RandomArray, element => element == l)) == false)
-                            {
-                                RandomArray[k] = l;
-                                
-                            }
-                        }
-                    }
-
                     bool NumberFound = false;
                     int m = 0;
                     while (NumberFound == false)
                     {
                         int o = 0;
                         int n = 0;
-                        bool SquareClear = false;
-                        Console.Write(RandomArray[m]);
-                        Thread.Sleep(50);
 
+                        int?[] RandomArray = new int?[9]; //Skapar en array mellan 0-8 med siffrorna 1-9 i slumpad ordning.
+                        for (int k = 0; k < 9; k++)
+                        {
+                            while (RandomArray[k] == null)
+                            {
+                                int l = new Random().Next(1, 10);
+                                if ((Array.Exists(RandomArray, element => element == l)) == false)
+                                {
+                                    RandomArray[k] = l;
+
+                                }
+                            }
+                        }
+
+                        Console.Write(RandomArray[m]);
 
                         for (int l = 0; l < 9; l++) //Kolla så raden inte innehåller det möjliga värdet för cellen.
                         {
                             if ((RandomArray[m] == SolvedBoard[i, l]) == false)
                             {
-                                n++; 
+                                n++;
                             }
                         }
 
                         for (int l = 0; l < 9; l++) //Kolla så kolumnen inte innehåller det möjliga värdet för cellen.
                         {
-                            
+
                             if ((RandomArray[m] == SolvedBoard[l, j]) == false)
                             {
                                 o++;
                             }
                         }
-                        
-                        
-                        
-
                         if (o == 9 && n == 9)
                         {
                             NumberFound = true;
@@ -1052,12 +1048,19 @@ namespace Assignments
                             Console.Write("Clear");
                             Console.WriteLine(SolvedBoard[i, j]);
                         }
-                        m++;
-                    }
-                    
 
+                        if (m == 8) m = 0;
+                        else m++;
+                    }
                 }
-                Console.WriteLine("-----------");
+            }
+            for (int i = 0; i < 9; i++) // Skriv ut det klara brädet
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    Console.Write(SolvedBoard[i, j].ToString());
+                }
+                Console.WriteLine();
             }
         }
     }
