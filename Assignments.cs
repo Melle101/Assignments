@@ -1008,6 +1008,7 @@ namespace Assignments
                     {
                         int o = 0;
                         int n = 0;
+                        int q = 0;
 
                         int?[] RandomArray = new int?[9]; //Skapar en array mellan 0-8 med siffrorna 1-9 i slumpad ordning.
                         for (int k = 0; k < 9; k++)
@@ -1041,7 +1042,126 @@ namespace Assignments
                                 o++;
                             }
                         }
-                        if (o == 9 && n == 9)
+
+                        if (i <= 2 && j <= 2)
+                        {
+                            for (int l = 0; l < 2; l++)
+                            {
+                                for (int p = 0; p < 2; p++)
+                                {
+                                    if ((RandomArray[m] == SolvedBoard[l, p]) == false)
+                                    {
+                                        q++;
+                                    }
+                                }
+                            }
+                        }
+                        if (i <= 2 && j >= 3 && j <= 5)
+                        {
+                            for (int l = 0; l < 2; l++)
+                            {
+                                for (int p = 3; p < 5; p++)
+                                {
+                                    if ((RandomArray[m] == SolvedBoard[l, p]) == false)
+                                    {
+                                        q++;
+                                    }
+                                }
+                            }
+                        }
+                        if (i <= 2 && j >= 6)
+                        {
+                            for (int l = 0; l < 2; l++)
+                            {
+                                for (int p = 6; p < 8; p++)
+                                {
+                                    if ((RandomArray[m] == SolvedBoard[l, j]) == false)
+                                    {
+                                        q++;
+                                    }
+                                }
+                            }
+                        }
+                        if (i >= 3 && i <= 5 && j <= 2)
+                        {
+                            for (int l = 3; l < 5; l++)
+                            {
+                                for (int p = 0; p < 2; p++)
+                                {
+                                    if ((RandomArray[m] == SolvedBoard[l, j]) == false)
+                                    {
+                                        q++;
+                                    }
+                                }
+                            }
+                        }
+                        if (i >= 3 && i <= 5 && j >= 3 && j <= 5)
+                        {
+                            for (int l = 3; l < 5; l++)
+                            {
+                                for (int p = 3; p < 5; p++)
+                                {
+                                    if ((RandomArray[m] == SolvedBoard[l, j]) == false)
+                                    {
+                                        q++;
+                                    }
+                                }
+                            }
+                        }
+                        if (i >= 3 && i <= 5 && j >= 6)
+                        {
+                            for (int l = 3; l < 5; l++)
+                            {
+                                for (int p = 6; p < 8; p++)
+                                {
+                                    if ((RandomArray[m] == SolvedBoard[l, j]) == false)
+                                    {
+                                        q++;
+                                    }
+                                }
+                            }
+                        }
+                        if (i >= 6 && j <= 2)
+                        {
+                            for (int l = 6; l < 8; l++)
+                            {
+                                for (int p = 0; p < 2; p++)
+                                {
+                                    if ((RandomArray[m] == SolvedBoard[l, j]) == false)
+                                    {
+                                        q++;
+                                    }
+                                }
+                            }
+                        }
+                        if (i >= 6 && j >= 3 && j <= 5)
+                        {
+                            for (int l = 6; l < 8; l++)
+                            {
+                                for (int p = 3; p < 5; p++)
+                                {
+                                    if ((RandomArray[m] == SolvedBoard[l, j]) == false)
+                                    {
+                                        q++;
+                                    }
+                                }
+                            }
+                        }
+                        if (i >= 6 && j >= 6)
+                        {
+                            for (int l = 6; l < 8; l++)
+                            {
+                                for (int p = 6; p < 8; p++)
+                                {
+                                    if ((RandomArray[m] == SolvedBoard[l, j]) == false)
+                                    {
+                                        q++;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (o == 9 && n == 9 && q == 9)
                         {
                             NumberFound = true;
                             SolvedBoard[i, j] = RandomArray[m];
