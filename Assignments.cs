@@ -1045,9 +1045,9 @@ namespace Assignments
 
                         if (i <= 2 && j <= 2)
                         {
-                            for (int l = 0; l < 2; l++)
+                            for (int l = 0; l <= 2; l++)
                             {
-                                for (int p = 0; p < 2; p++)
+                                for (int p = 0; p <= 2; p++)
                                 {
                                     if ((RandomArray[m] == SolvedBoard[l, p]) == false)
                                     {
@@ -1058,9 +1058,9 @@ namespace Assignments
                         }
                         if (i <= 2 && j >= 3 && j <= 5)
                         {
-                            for (int l = 0; l < 2; l++)
+                            for (int l = 0; l <= 2; l++)
                             {
-                                for (int p = 3; p < 5; p++)
+                                for (int p = 3; p <= 5; p++)
                                 {
                                     if ((RandomArray[m] == SolvedBoard[l, p]) == false)
                                     {
@@ -1071,9 +1071,9 @@ namespace Assignments
                         }
                         if (i <= 2 && j >= 6)
                         {
-                            for (int l = 0; l < 2; l++)
+                            for (int l = 0; l <= 2; l++)
                             {
-                                for (int p = 6; p < 8; p++)
+                                for (int p = 6; p <= 8; p++)
                                 {
                                     if ((RandomArray[m] == SolvedBoard[l, j]) == false)
                                     {
@@ -1084,9 +1084,9 @@ namespace Assignments
                         }
                         if (i >= 3 && i <= 5 && j <= 2)
                         {
-                            for (int l = 3; l < 5; l++)
+                            for (int l = 3; l <= 5; l++)
                             {
-                                for (int p = 0; p < 2; p++)
+                                for (int p = 0; p <= 2; p++)
                                 {
                                     if ((RandomArray[m] == SolvedBoard[l, j]) == false)
                                     {
@@ -1097,9 +1097,9 @@ namespace Assignments
                         }
                         if (i >= 3 && i <= 5 && j >= 3 && j <= 5)
                         {
-                            for (int l = 3; l < 5; l++)
+                            for (int l = 3; l <= 5; l++)
                             {
-                                for (int p = 3; p < 5; p++)
+                                for (int p = 3; p <= 5; p++)
                                 {
                                     if ((RandomArray[m] == SolvedBoard[l, j]) == false)
                                     {
@@ -1110,9 +1110,9 @@ namespace Assignments
                         }
                         if (i >= 3 && i <= 5 && j >= 6)
                         {
-                            for (int l = 3; l < 5; l++)
+                            for (int l = 3; l <= 5; l++)
                             {
-                                for (int p = 6; p < 8; p++)
+                                for (int p = 6; p <= 8; p++)
                                 {
                                     if ((RandomArray[m] == SolvedBoard[l, j]) == false)
                                     {
@@ -1123,9 +1123,9 @@ namespace Assignments
                         }
                         if (i >= 6 && j <= 2)
                         {
-                            for (int l = 6; l < 8; l++)
+                            for (int l = 6; l <= 8; l++)
                             {
-                                for (int p = 0; p < 2; p++)
+                                for (int p = 0; p <= 2; p++)
                                 {
                                     if ((RandomArray[m] == SolvedBoard[l, j]) == false)
                                     {
@@ -1136,9 +1136,9 @@ namespace Assignments
                         }
                         if (i >= 6 && j >= 3 && j <= 5)
                         {
-                            for (int l = 6; l < 8; l++)
+                            for (int l = 6; l <= 8; l++)
                             {
-                                for (int p = 3; p < 5; p++)
+                                for (int p = 3; p <= 5; p++)
                                 {
                                     if ((RandomArray[m] == SolvedBoard[l, j]) == false)
                                     {
@@ -1149,9 +1149,9 @@ namespace Assignments
                         }
                         if (i >= 6 && j >= 6)
                         {
-                            for (int l = 6; l < 8; l++)
+                            for (int l = 6; l <= 8; l++)
                             {
-                                for (int p = 6; p < 8; p++)
+                                for (int p = 6; p <= 8; p++)
                                 {
                                     if ((RandomArray[m] == SolvedBoard[l, j]) == false)
                                     {
@@ -1160,7 +1160,6 @@ namespace Assignments
                                 }
                             }
                         }
-
                         if (o == 9 && n == 9 && q == 9)
                         {
                             NumberFound = true;
@@ -1173,6 +1172,7 @@ namespace Assignments
                         else m++;
                     }
                 }
+                Console.WriteLine("-------------");
             }
             for (int i = 0; i < 9; i++) // Skriv ut det klara brädet
             {
@@ -1181,6 +1181,23 @@ namespace Assignments
                     Console.Write(SolvedBoard[i, j].ToString());
                 }
                 Console.WriteLine();
+            }
+        } 
+        public static void SquaresFirst()
+        {
+            int l = 0;
+            for (int k = 0; k < 9; k += 3)
+            { 
+                for (int i = k; i < k + 3; i++)
+                {
+                    for (int j = l; j < l + 3; j++)
+                    {
+                        Console.Write(i);
+                        Console.Write(j + " ");
+                    }
+                    Console.WriteLine();
+                }
+                l += 3;
             }
         }
     }
