@@ -1004,6 +1004,7 @@ namespace Assignments
                 {
                     bool NumberFound = false;
                     int m = 0;
+                    int r = 0;
                     while (NumberFound == false)
                     {
                         int o = 0;
@@ -1023,9 +1024,7 @@ namespace Assignments
                                 }
                             }
                         }
-
                         Console.Write(RandomArray[m]);
-
                         for (int l = 0; l < 9; l++) //Kolla så raden inte innehåller det möjliga värdet för cellen.
                         {
                             if ((RandomArray[m] == SolvedBoard[i, l]) == false)
@@ -1033,7 +1032,6 @@ namespace Assignments
                                 n++;
                             }
                         }
-
                         for (int l = 0; l < 9; l++) //Kolla så kolumnen inte innehåller det möjliga värdet för cellen.
                         {
 
@@ -1042,121 +1040,15 @@ namespace Assignments
                                 o++;
                             }
                         }
-
-                        if (i <= 2 && j <= 2)
+                        int LowerBoundSquareRow = Convert.ToInt32(Math.Floor(i / 3.0)) * 3; //Hitta start cellen för 3x3 Rutan som en cell är i. 
+                        int LowerBoundSquareColumn = Convert.ToInt32(Math.Floor(j / 3.0)) * 3; // T.Ex Cell 5;0 Row 5 => 5/3 = 1.67 => .Floor = 1 => *3 = 3, samma för kolumnen ger start rutan 3;6
+                        for (int l = LowerBoundSquareRow; l < (LowerBoundSquareRow + 3); l++) //Kolla 3x3 Rutan för cellen. Lägg till 3 för att kolla hela 3x3 rutan
                         {
-                            for (int l = 0; l <= 2; l++)
+                            for (int p = LowerBoundSquareColumn; p < (LowerBoundSquareColumn + 3); p++)
                             {
-                                for (int p = 0; p <= 2; p++)
+                                if ((RandomArray[m] == SolvedBoard[l, p]) == false)
                                 {
-                                    if ((RandomArray[m] == SolvedBoard[l, p]) == false)
-                                    {
-                                        q++;
-                                    }
-                                }
-                            }
-                        }
-                        if (i <= 2 && j >= 3 && j <= 5)
-                        {
-                            for (int l = 0; l <= 2; l++)
-                            {
-                                for (int p = 3; p <= 5; p++)
-                                {
-                                    if ((RandomArray[m] == SolvedBoard[l, p]) == false)
-                                    {
-                                        q++;
-                                    }
-                                }
-                            }
-                        }
-                        if (i <= 2 && j >= 6)
-                        {
-                            for (int l = 0; l <= 2; l++)
-                            {
-                                for (int p = 6; p <= 8; p++)
-                                {
-                                    if ((RandomArray[m] == SolvedBoard[l, j]) == false)
-                                    {
-                                        q++;
-                                    }
-                                }
-                            }
-                        }
-                        if (i >= 3 && i <= 5 && j <= 2)
-                        {
-                            for (int l = 3; l <= 5; l++)
-                            {
-                                for (int p = 0; p <= 2; p++)
-                                {
-                                    if ((RandomArray[m] == SolvedBoard[l, j]) == false)
-                                    {
-                                        q++;
-                                    }
-                                }
-                            }
-                        }
-                        if (i >= 3 && i <= 5 && j >= 3 && j <= 5)
-                        {
-                            for (int l = 3; l <= 5; l++)
-                            {
-                                for (int p = 3; p <= 5; p++)
-                                {
-                                    if ((RandomArray[m] == SolvedBoard[l, j]) == false)
-                                    {
-                                        q++;
-                                    }
-                                }
-                            }
-                        }
-                        if (i >= 3 && i <= 5 && j >= 6)
-                        {
-                            for (int l = 3; l <= 5; l++)
-                            {
-                                for (int p = 6; p <= 8; p++)
-                                {
-                                    if ((RandomArray[m] == SolvedBoard[l, j]) == false)
-                                    {
-                                        q++;
-                                    }
-                                }
-                            }
-                        }
-                        if (i >= 6 && j <= 2)
-                        {
-                            for (int l = 6; l <= 8; l++)
-                            {
-                                for (int p = 0; p <= 2; p++)
-                                {
-                                    if ((RandomArray[m] == SolvedBoard[l, j]) == false)
-                                    {
-                                        q++;
-                                    }
-                                }
-                            }
-                        }
-                        if (i >= 6 && j >= 3 && j <= 5)
-                        {
-                            for (int l = 6; l <= 8; l++)
-                            {
-                                for (int p = 3; p <= 5; p++)
-                                {
-                                    if ((RandomArray[m] == SolvedBoard[l, j]) == false)
-                                    {
-                                        q++;
-                                    }
-                                }
-                            }
-                        }
-                        if (i >= 6 && j >= 6)
-                        {
-                            for (int l = 6; l <= 8; l++)
-                            {
-                                for (int p = 6; p <= 8; p++)
-                                {
-                                    if ((RandomArray[m] == SolvedBoard[l, j]) == false)
-                                    {
-                                        q++;
-                                    }
+                                    q++;
                                 }
                             }
                         }
@@ -1167,12 +1059,23 @@ namespace Assignments
                             Console.Write("Clear");
                             Console.WriteLine(SolvedBoard[i, j]);
                         }
-
-                        if (m == 8) m = 0;
-                        else m++;
+                        if (m == 8)
+                        {
+                            m = 0;
+                            if ( r >= 16)
+                            {
+                                for (int l = 0; l < 9; l++) // If a row paints itself into a corner, remake the row after a few tries.
+                                {
+                                    SolvedBoard[i, l] = null;
+                                    j = 0;
+                                }
+                                Console.WriteLine($"------------- ^Invalid Row for Row {i}");
+                            }
+                        }
+                        else m++; r++;
                     }
                 }
-                Console.WriteLine("-------------");
+                Console.WriteLine($"------------- ^Row {i}");
             }
             for (int i = 0; i < 9; i++) // Skriv ut det klara brädet
             {
