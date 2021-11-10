@@ -1000,11 +1000,13 @@ namespace Assignments
 
             for (int i = 0; i < 9; i++)
             {
+                int s = 0;
                 for (int j = 0; j < 9; j++)
                 {
                     bool NumberFound = false;
                     int m = 0;
                     int r = 0;
+
                     while (NumberFound == false)
                     {
                         int n = 0; //Row Cleared Counter
@@ -1040,8 +1042,8 @@ namespace Assignments
                                 o++;
                             }
                         }
-                        int LowerBoundSquareRow = (int)(i / 3.0) * 3; //Find start cell for the 3x3 Box that the cell is in. 
-                        int LowerBoundSquareColumn = (int)(j / 3.0) * 3; // T.Ex Cell 5;0 Row 5 => 5/3 = 1.67 => .Floor = 1 => *3 = 3, same for column gives cell 3;6
+                        int LowerBoundSquareRow = i / 3 * 3; //Find start cell for the 3x3 Box that the cell is in. 
+                        int LowerBoundSquareColumn = j / 3 * 3; //Ex Cell 5;0 Row 5 => 5/3 = 1.67 => .Floor = 1 => *3 = 3, same for column gives cell 3;6
                         for (int l = LowerBoundSquareRow; l < (LowerBoundSquareRow + 3); l++) //Check 3x3 Box for the cell, add 3 to find last cell in 3x3
                         {
                             for (int p = LowerBoundSquareColumn; p < (LowerBoundSquareColumn + 3); p++)
@@ -1064,20 +1066,35 @@ namespace Assignments
                             m = 0;
                             if ( r >= 32)
                             {
-                                for (int l = 0; l < 9; l++) // If a row paints itself into a corner, remake the row after a few tries.
+                                for (int l = 0; l < 9; l++) //If a row paints itself into a corner, remake the row after a few tries.
                                 {
                                     SolvedBoard[i, l] = null;
                                     j = 0;
                                 }
                                 Console.WriteLine($"------------- ^Invalid Row for Row {i}");
+                                s++;
                             }
                         }
                         else m++; r++;
+                        if (s >= 6) //Restart grid generation if it comes to a dead end
+                        {
+                            Console.WriteLine("Grid Reset");
+                            for (int k = 0; k < 9; k++)
+                            {
+                                for (int l = 0; l < 9; l++)
+                                {
+                                    SolvedBoard[k, l] = null;
+                                    i = 0;
+                                    j = 0;
+                                    s = 0;
+                                }
+                            }
+                        }
                     }
                 }
                 Console.WriteLine($"------------- ^Row {i}");
             }
-            for (int i = 0; i < 9; i++) // Print final board
+            for (int i = 0; i < 9; i++) //Print final board
             {
                 for (int j = 0; j < 9; j++)
                 {
