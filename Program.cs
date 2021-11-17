@@ -13,7 +13,7 @@ namespace Assignments
     {
         static void Main(string[] args)
         {
-            Other.SudokuFillTest();
+            ProgSharpK2.Uppgift208();
            
             Console.ReadKey(); 
         }  

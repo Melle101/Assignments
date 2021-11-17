@@ -670,8 +670,8 @@ namespace Assignments
         public static void Uppgift409()
         {
             Console.Write("Hur många kvadrattal?: ");
-            int x = int.Parse(Console.ReadLine()) + 1;
-            for (int i = 1;  i < x; i++)
+            int x = int.Parse(Console.ReadLine());
+            for (int i = 1;  i <= x; i++)
             {
                 Console.WriteLine($"{i} * {i} = {i * i}");
             }
@@ -1120,6 +1120,64 @@ namespace Assignments
                 l += 3;
             }
         }
+        public static void Loopar3()
+        {
+            int guess = new Random().Next(1, 101);
+            int tries = 1;
+            bool number_found = false;
+
+            while (!number_found)
+            {
+                Console.Write($"Är {guess} högt eller lågt eller rätt?: ");
+                string högt_eller_lågt = Console.ReadLine().ToLower();
+                if (högt_eller_lågt == "högt")
+                {
+                    guess = new Random().Next(1, guess);
+                }
+                else if (högt_eller_lågt == "lågt")
+                {
+                    guess = new Random().Next(guess, 101);
+                }
+                else if (högt_eller_lågt == "rätt")
+                {
+                    number_found = true;
+                    Console.WriteLine($"Det tog {tries} gissningar att hitta dit tal som var {guess}.");
+                }
+                tries++;
+            }
+        }
+        public static void Calculator()
+        {
+            Console.Write("Skriv ett uttryck med endast +,-,*,/ tecken utan mellanslag: ");
+            string input = Console.ReadLine();
+
+            List<majorTerm> majorTerms = new List<majorTerm>();
+            majorTerms.Add(new majorTerm() { Term = "10*9", sub_or_add = '+' });
+
+            if (input.Contains('+') || input.Contains('-'))
+            {
+                string tempString = input; 
+                int freq = 0;
+                char[] chars = { '+', '-' }; 
+                foreach (char c in input)
+                {
+                    if (c == '+' || c == '-') freq++;
+                }
+                for (int i = 0; i < freq; i++)
+                {
+                    string term = input[..input.IndexOfAny(chars)];
+                    majorTerms.Add(new majorTerm() { Term = term, sub_or_add = input[input.IndexOfAny(chars)] });
+                }
+            }
+
+        }
+    }
+
+    internal class majorTerm
+    {
+        public string Term { get; set; }
+
+        public char sub_or_add { get; set; }
     }
 }
                 
