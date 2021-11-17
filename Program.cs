@@ -13,7 +13,7 @@ namespace Assignments
     {
         static void Main(string[] args)
         {
-            Other.SudokuFillTest();
+            Other.Loopar3();
            
             Console.ReadKey(); 
         }  

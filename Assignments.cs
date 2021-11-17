@@ -1120,6 +1120,36 @@ namespace Assignments
                 l += 3;
             }
         }
+        public static void Loopar3()
+        {
+            int guess = new Random().Next(1, 101);
+            int tries = 1;
+            bool number_found = false;
+
+            while (!number_found)
+            {
+                Console.Write($"Är {guess} högt eller lågt eller rätt?: ");
+                string högt_eller_lågt = Console.ReadLine().ToLower();
+                if (högt_eller_lågt == "högt")
+                {
+                    guess = new Random().Next(1, guess);
+                }
+                else if (högt_eller_lågt == "lågt")
+                {
+                    guess = new Random().Next(guess, 101);
+                }
+                else if (högt_eller_lågt == "rätt")
+                {
+                    number_found = true;
+                    Console.WriteLine($"Det tog {tries} gissningar att hitta dit tal som var {guess}.");
+                }
+                tries++;
+            }
+
+            
+
+
+        }
     }
 }
                 
