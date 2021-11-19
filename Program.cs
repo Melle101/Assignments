@@ -13,7 +13,7 @@ namespace Assignments
     {
         static void Main(string[] args)
         {
-            Other.Loopar4D();
+            Other.Calculator();
            
             Console.ReadKey(); 
         }  

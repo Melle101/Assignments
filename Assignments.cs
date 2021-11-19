@@ -670,8 +670,8 @@ namespace Assignments
         public static void Uppgift409()
         {
             Console.Write("Hur många kvadrattal?: ");
-            int x = int.Parse(Console.ReadLine()) + 1;
-            for (int i = 1;  i < x; i++)
+            int x = int.Parse(Console.ReadLine());
+            for (int i = 1;  i <= x; i++)
             {
                 Console.WriteLine($"{i} * {i} = {i * i}");
             }
@@ -1148,7 +1148,6 @@ namespace Assignments
         }
         public static void Loopar4D()
         {
-
             Console.Write("Ange ett tal: ");
             int input = int.Parse(Console.ReadLine());
             List<int> legal_numerators = new List<int>();
@@ -1173,9 +1172,77 @@ namespace Assignments
                 }
             }
         }
+        public static void Calculator()
+        {
+            Console.Write("Skriv ett uttryck med endast +,-,*,/ tecken utan mellanslag: ");
+            string input = Console.ReadLine();
+            bool has_div_or_mult = false;
+            char[] charsAll = {'*', '/', '+', '-' };
+            char[] charsMultiDiv = {'*', '/' };
+            char[] charsAddSub = {'+', '-' };
+            if (input.Contains('*') || input.Contains('/')) has_div_or_mult = true;
+            while (has_div_or_mult)
+            {
+                double tempAnswer = 0;
+                int op_index = input.IndexOfAny(charsMultiDiv);
+                int start_index = input[..op_index].IndexOfAny(charsAll);
+                int end_index = input[(op_index + 1)..].IndexOfAny(charsAll) + op_index;
 
+                double first_term;
+                if (start_index < 0)
+                {
+                    first_term = double.Parse(input[..op_index]);
+                    start_index = 0;
+                }
+                else first_term = double.Parse(input[start_index..op_index]);   
+                
+                double second_term;
+                if (input[(op_index + 1)..].IndexOfAny(charsAll) < 0)
+                {
+                    second_term = double.Parse(input[(op_index + 1)..]);
+                    end_index = input.Length;
+                }
+                else second_term = double.Parse(input[(op_index + 1)..(end_index + 1)]);
+
+                if (input[op_index] == '*') tempAnswer = first_term * second_term;
+                else if (input[op_index] == '/') tempAnswer = first_term / second_term;
+
+
+                if (input[start_index] == '+' || input[start_index] == '-')
+                {
+                    if (input[(op_index + 1)..].IndexOfAny(charsAll) < 0) input = input.Remove((start_index + 1), (end_index - start_index));
+                    else input = input.Remove((start_index + 1), ((end_index + op_index) - start_index) + 1);
+                }
+                else
+                {
+                    if (input[(op_index + 1)..].IndexOfAny(charsAll) < 0) input = input.Remove(start_index, (end_index - start_index));
+                    else input = input.Remove(start_index, ((end_index) - start_index) + 1);
+                }
+
+                input = input.Insert(start_index, tempAnswer.ToString());
+                if ((input.Contains('*') == false && input.Contains('/') == false)) has_div_or_mult = false;
+
+            }
+            Console.WriteLine(input);
+        }
+        public static void test()
+        {
+            string text = "0123456789";
+            Console.WriteLine(text);
+            text = text.Remove(0, 1);
+            Console.WriteLine(text);
+            
+        }
 
     }
 }
+
+    internal class majorTerm
+    {
+        public string Term { get; set; }
+
+        public char sub_or_add { get; set; }
+    }
+
                 
  
