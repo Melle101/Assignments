@@ -1145,11 +1145,36 @@ namespace Assignments
                 }
                 tries++;
             }
-
-            
-
-
         }
+        public static void Loopar4D()
+        {
+
+            Console.Write("Ange ett tal: ");
+            int input = int.Parse(Console.ReadLine());
+            List<int> legal_numerators = new List<int>();
+
+            for (int i = 2; i < Math.Sqrt(input); i++)
+            {
+                if (input % i == 0)
+                {
+                    legal_numerators.Add(i);
+                }
+            }
+            if (!legal_numerators.Any())
+            {
+                Console.WriteLine($"{input} är ett primtal.");
+            }
+            else
+            {
+                Console.WriteLine($"{input} är inte ett primtal, {input} är delbart med alla dessa tal: ");
+                foreach (int item in legal_numerators)
+                {
+                    Console.WriteLine(item); 
+                }
+            }
+        }
+
+
     }
 }
                 
