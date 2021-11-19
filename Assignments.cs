@@ -670,8 +670,8 @@ namespace Assignments
         public static void Uppgift409()
         {
             Console.Write("Hur många kvadrattal?: ");
-            int x = int.Parse(Console.ReadLine()) + 1;
-            for (int i = 1;  i < x; i++)
+            int x = int.Parse(Console.ReadLine());
+            for (int i = 1;  i <= x; i++)
             {
                 Console.WriteLine($"{i} * {i} = {i * i}");
             }
@@ -1148,6 +1148,14 @@ namespace Assignments
         }
         public static void Loopar4D()
         {
+        }
+        public static void Calculator()
+        {
+            Console.Write("Skriv ett uttryck med endast +,-,*,/ tecken utan mellanslag: ");
+            string input = Console.ReadLine();
+
+            List<majorTerm> majorTerms = new List<majorTerm>();
+            majorTerms.Add(new majorTerm() { Term = "10*9", sub_or_add = '+' });
 
             Console.Write("Ange ett tal: ");
             int input = int.Parse(Console.ReadLine());
@@ -1173,8 +1181,30 @@ namespace Assignments
                 }
             }
         }
+            if (input.Contains('+') || input.Contains('-'))
+            {
+                string tempString = input; 
+                int freq = 0;
+                char[] chars = { '+', '-' }; 
+                foreach (char c in input)
+                {
+                    if (c == '+' || c == '-') freq++;
+                }
+                for (int i = 0; i < freq; i++)
+                {
+                    string term = input[..input.IndexOfAny(chars)];
+                    majorTerms.Add(new majorTerm() { Term = term, sub_or_add = input[input.IndexOfAny(chars)] });
+                }
+            }
 
+        }
+    }
 
+    internal class majorTerm
+    {
+        public string Term { get; set; }
+
+        public char sub_or_add { get; set; }
     }
 }
                 
