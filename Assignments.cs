@@ -1177,6 +1177,7 @@ namespace Assignments
             Console.Write("Skriv ett uttryck med endast +,-,*,/ tecken utan mellanslag: ");
             string input = Console.ReadLine();
             bool has_div_or_mult = false;
+            bool has_add_or_sub = false;
             char[] charsAll = {'*', '/', '+', '-' };
             char[] charsMultiDiv = {'*', '/' };
             char[] charsAddSub = {'+', '-' };
@@ -1194,8 +1195,56 @@ namespace Assignments
                     first_term = double.Parse(input[..op_index]);
                     start_index = 0;
                 }
-                else first_term = double.Parse(input[start_index..op_index]);   
-                
+                else
+                {
+                    first_term = double.Parse(input[start_index..op_index]);
+                    start_index += 1;
+                }
+                double second_term;
+                if (input[(op_index + 1)..].IndexOfAny(charsAll) < 0)
+                {
+                    second_term = double.Parse(input[(op_index + 1)..]);
+                    end_index = input.Length;
+                }
+                else second_term = double.Parse(input[(op_index + 1)..(end_index + 1)]);
+                if (input[op_index] == '*') tempAnswer = first_term * second_term;
+                else if (input[op_index] == '/') tempAnswer = first_term / second_term;
+                if (input[start_index] == '+' || input[start_index] == '-')
+                {
+                    if (input[(op_index + 1)..].IndexOfAny(charsAll) < 0) input = input.Remove((start_index + 1), (end_index - start_index));
+                    else input = input.Remove((start_index + 1), (end_index + op_index) - start_index + 1);
+                }
+                else
+                {
+                    if (input[(op_index + 1)..].IndexOfAny(charsAll) < 0) input = input.Remove(start_index, (end_index - start_index));
+                    else input = input.Remove(start_index, ((end_index) - start_index) + 1);
+                }
+
+                input = input.Insert(start_index, tempAnswer.ToString());
+                if ((input.Contains('*') == false && input.Contains('/') == false)) has_div_or_mult = false;
+            }
+            Console.WriteLine(input);
+
+            if (input.Contains('+') || input.Contains('-')) has_add_or_sub = true;
+            while (has_add_or_sub)
+            {
+                double tempAnswer = 0;
+                int op_index = input.IndexOfAny(charsAddSub);
+                int start_index = input[..op_index].IndexOfAny(charsAll);
+                int end_index = input[(op_index + 1)..].IndexOfAny(charsAll) + op_index;
+
+                double first_term;
+                if (start_index < 0)
+                {
+                    first_term = double.Parse(input[..op_index]);
+                    start_index = 0;
+                }
+                else
+                {
+                    first_term = double.Parse(input[start_index..op_index]);
+                    start_index += 1;
+                }
+
                 double second_term;
                 if (input[(op_index + 1)..].IndexOfAny(charsAll) < 0)
                 {
@@ -1204,8 +1253,8 @@ namespace Assignments
                 }
                 else second_term = double.Parse(input[(op_index + 1)..(end_index + 1)]);
 
-                if (input[op_index] == '*') tempAnswer = first_term * second_term;
-                else if (input[op_index] == '/') tempAnswer = first_term / second_term;
+                if (input[op_index] == '+') tempAnswer = first_term + second_term;
+                else if (input[op_index] == '-') tempAnswer = first_term - second_term;
 
 
                 if (input[start_index] == '+' || input[start_index] == '-')
@@ -1220,8 +1269,7 @@ namespace Assignments
                 }
 
                 input = input.Insert(start_index, tempAnswer.ToString());
-                if ((input.Contains('*') == false && input.Contains('/') == false)) has_div_or_mult = false;
-
+                if ((input.Contains('+') == false && input.Contains('-') == false)) has_add_or_sub = false;
             }
             Console.WriteLine(input);
         }
