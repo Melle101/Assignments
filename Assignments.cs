@@ -1009,9 +1009,6 @@ namespace Assignments
 
                     while (NumberFound == false)
                     {
-                        int n = 0; //Row Cleared Counter
-                        int o = 0; //Column Cleared Counter
-                        int q = 0; //Cell in 3x3 Cleared Counter
 
                         int?[] RandomArray = new int?[9]; //Creates and array with numbers 1-9 in random order.
                         for (int k = 0; k < 9; k++)
@@ -1027,34 +1024,18 @@ namespace Assignments
                             }
                         }
                         Console.Write(RandomArray[m]);
-                        for (int l = 0; l < 9; l++) //Check so Row doesn't contain the possible value for the cell
-                        {
-                            if ((RandomArray[m] == SolvedBoard[i, l]) == false)
-                            {
-                                n++;
-                            }
-                        }
-                        for (int l = 0; l < 9; l++) //Check so column doesn't contain the possible value for the cell
-                        {
+                        bool number_clear = true;
 
-                            if ((RandomArray[m] == SolvedBoard[l, j]) == false)
-                            {
-                                o++;
-                            }
-                        }
-                        int LowerBoundSquareRow = i / 3 * 3; //Find start cell for the 3x3 Box that the cell is in. 
-                        int LowerBoundSquareColumn = j / 3 * 3; //Ex Cell 5;0 Row 5 => 5/3 = 1.67 => .Floor = 1 => *3 = 3, same for column gives cell 3;6
-                        for (int l = LowerBoundSquareRow; l < (LowerBoundSquareRow + 3); l++) //Check 3x3 Box for the cell, add 3 to find last cell in 3x3
+                        int rowStart = (i / 3) * 3;
+                        int colStart = (j / 3) * 3;
+
+                        for (int l = 0; l < 9; ++l)
                         {
-                            for (int p = LowerBoundSquareColumn; p < (LowerBoundSquareColumn + 3); p++)
-                            {
-                                if ((RandomArray[m] == SolvedBoard[l, p]) == false)
-                                {
-                                    q++;
-                                }
-                            }
+                            if (SolvedBoard[i, l] == RandomArray[m]) number_clear = false;
+                            if (SolvedBoard[l, j] == RandomArray[m]) number_clear = false;
+                            if (SolvedBoard[rowStart + (l % 3), colStart + (l / 3)] == RandomArray[m]) number_clear = false;
                         }
-                        if (o == 9 && n == 9 && q == 9)
+                        if (number_clear)
                         {
                             NumberFound = true;
                             SolvedBoard[i, j] = RandomArray[m];
@@ -1103,22 +1084,21 @@ namespace Assignments
                 Console.WriteLine();
             }
         } 
-        public static void SquaresFirst()
+        public static int?[,] SudokuSolver(int?[,] arr)
         {
-            int l = 0;
-            for (int k = 0; k < 9; k += 3)
-            { 
-                for (int i = k; i < k + 3; i++)
+            int?[,] temp_board = new int?[9, 9];
+
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
                 {
-                    for (int j = l; j < l + 3; j++)
+                    if (arr[i, j] != null)
                     {
-                        Console.Write(i);
-                        Console.Write(j + " ");
+
                     }
-                    Console.WriteLine();
                 }
-                l += 3;
             }
+            return temp_board;
         }
         public static void Loopar3()
         {
@@ -1273,14 +1253,6 @@ namespace Assignments
             }
             Console.WriteLine(input);
         }
-        public static void test()
-        {
-            string text = "0123456789";
-            Console.WriteLine(text);
-            text = text.Remove(0, 1);
-            Console.WriteLine(text);
-            
-        }
         public static void UppgiftA()
         {
             for (int i = 0; i < 5; i++)
@@ -1339,14 +1311,134 @@ namespace Assignments
             }
         }
     }
+    public class Sudoku
+    {
+        public static int?[,] SudokuFillTest()
+        {
+            int?[,] SolvedBoard = new int?[9, 9];
+
+            for (int i = 0; i < 9; i++)
+            {
+                int s = 0;
+                for (int j = 0; j < 9; j++)
+                {
+                    bool NumberFound = false;
+                    int m = 0;
+                    int r = 0;
+
+                    while (NumberFound == false)
+                    {
+                        int?[] RandomArray = new int?[9]; //Creates and array with numbers 1-9 in random order.
+                        for (int k = 0; k < 9; k++)
+                        {
+                            while (RandomArray[k] == null)
+                            {
+                                int l = new Random().Next(1, 10);
+                                if ((Array.Exists(RandomArray, element => element == l)) == false)
+                                {
+                                    RandomArray[k] = l;
+
+                                }
+                            }
+                        }
+                        if (NumberValid(SolvedBoard, i, j, RandomArray[m]))
+                        {
+                            NumberFound = true;
+                            SolvedBoard[i, j] = RandomArray[m];
+                        }
+                        if (m == 8)
+                        {
+                            m = 0;
+                            if (r >= 32)
+                            {
+                                for (int l = 0; l < 9; l++) //If a row paints itself into a corner, remake the row after a few tries.
+                                {
+                                    SolvedBoard[i, l] = null;
+                                    j = 0;
+                                }
+                                s++;
+                            }
+                        }
+                        else m++; r++;
+                        if (s >= 6) //Restart grid generation if it comes to a dead end
+                        {
+                            for (int k = 0; k < 9; k++)
+                            {
+                                for (int l = 0; l < 9; l++)
+                                {
+                                    SolvedBoard[k, l] = null;
+                                    i = 0;
+                                    j = 0;
+                                    s = 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return SolvedBoard;
+        }
+        public static int?[,] SudokuSolver(int?[,] arr)
+        {
+            int?[,] temp_arr = arr;
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    if (arr[i, j] == null)
+                    {
+                        for (int k = 1; k <= 9; k++)
+                        {
+                            if(NumberValid(arr, i, j, k))
+                            {
+                                
+                                arr[i, j] = k;
+                                for (int l = 0; l < 9; l++) //Print board with removed cells
+                                {
+                                    for (int m = 0; m < 9; m++)
+                                    {
+                                        if (arr[l, m] == null) Console.Write(".");
+                                        else Console.Write(arr[l, m].ToString());
+                                    }
+                                    Console.WriteLine();
+                                }
+                                Console.WriteLine();
+                                arr = SudokuSolver(arr);
+                            }
+                        }
+                        if (arr[i, j] == null) return temp_arr;
+                    }
+                }
+            }
+            return arr;
+        }
+        public static bool test(int num)
+        {
+            num = 1;
+            return true;
+        }
+
+        public static bool NumberValid(int?[,] board, int row, int column, int? value)
+        {
+            int rowStart = (row / 3) * 3;
+            int colStart = (column / 3) * 3;
+
+            for (int i = 0; i < 9; ++i)
+            {
+                if (board[row, i] == value) return false;
+                if (board[i, column] == value) return false;
+                if (board[rowStart + (i % 3), colStart + (i / 3)] == value) return false;
+            }
+
+            return true;
+        }
+    }
 }
 
-    internal class majorTerm
-    {
-        public string Term { get; set; }
 
-        public char sub_or_add { get; set; }
-    }
+    
+
+
 
 
                 
