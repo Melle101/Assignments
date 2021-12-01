@@ -37,7 +37,7 @@ namespace Assignments
             Console.WriteLine("\n \n \n \n");
             
 
-            SolvedBoard = Sudoku.SudokuSolver(SolvedBoard);
+            Sudoku.SudokuSolver(SolvedBoard, out SolvedBoard);
             for (int i = 0; i < 9; i++) //Print final board
             {
                 for (int j = 0; j < 9; j++)

@@ -1378,29 +1378,44 @@ namespace Assignments
             }
             return SolvedBoard;
         }
-        public static int?[,] SudokuSolver(int?[,] arr)
+        public static bool SudokuSolver(int?[,] arr, out int?[,] solvedBoard)
         {
-            int?[,] temp_arr = arr;
+            solvedBoard = arr;
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    if (arr[i, j] == null)
+                    if (solvedBoard[i, j] == null)
                     {
                         for (int k = 1; k <= 9; k++)
                         {
                             if(NumberValid(arr, i, j, k))
                             {
-                                
-                                arr[i, j] = k;
-                                arr = SudokuSolver(arr);
+
+                                solvedBoard[i, j] = k;
+                                for (int l = 0; l < 9; l++) //Print board with removed cells
+                                {
+                                    for (int m = 0; m < 9; m++)
+                                    {
+                                        if (solvedBoard[l, m] == null) Console.Write(".");
+                                        else Console.Write(solvedBoard[l, m].ToString());
+                                    }
+                                    Console.WriteLine();
+                                }
+                                Console.WriteLine();
+                                if (SudokuSolver(arr, out solvedBoard))
+                                {
+                                    return true;
+                                }
+                                else solvedBoard[i, j] = null;
+
                             }
                         }
-                        if (arr[i, j] == null) return temp_arr;
+                       return false;
                     }
                 }
             }
-            return arr;
+            return true;
         }
         public static bool NumberValid(int?[,] board, int row, int column, int? value)
         {
