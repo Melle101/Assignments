@@ -978,7 +978,7 @@ namespace Assignments
             }
             Console.WriteLine($"Medelvärdet är {sum / 10}.");
         }
-        public static void RandomArray()
+        public static int?[] RandomArray()
         {
             int?[] arr = new int?[9];
             for (int i = 0; i < 9; i++)
@@ -989,10 +989,10 @@ namespace Assignments
                     if ((Array.Exists(arr, element => element == k)) == false)
                     {
                         arr[i] = k;
-                        Console.WriteLine(arr[i].ToString());
                     }
                 }
             }
+            return arr;
         }
         public static void SudokuFillTest()
         {
@@ -1381,19 +1381,22 @@ namespace Assignments
         public static bool SudokuSolver(int?[,] arr, out int?[,] solvedBoard)
         {
             solvedBoard = arr;
+            int?[] random_array = Other.RandomArray();
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
                 {
                     if (solvedBoard[i, j] == null)
                     {
-                        for (int k = 1; k <= 9; k++)
+                        
+                        for (int k = 0; k <= 8; k++)
                         {
-                            if(NumberValid(arr, i, j, k))
+                            
+                            if(NumberValid(arr, i, j, random_array[k]))
                             {
 
-                                solvedBoard[i, j] = k;
-                                for (int l = 0; l < 9; l++) //Print board with removed cells
+                                solvedBoard[i, j] = random_array[k];
+                                /*for (int l = 0; l < 9; l++) //Print board with removed cells
                                 {
                                     for (int m = 0; m < 9; m++)
                                     {
@@ -1402,7 +1405,7 @@ namespace Assignments
                                     }
                                     Console.WriteLine();
                                 }
-                                Console.WriteLine();
+                                Console.WriteLine();*/
                                 if (SudokuSolver(arr, out solvedBoard))
                                 {
                                     return true;
@@ -1416,6 +1419,17 @@ namespace Assignments
                 }
             }
             return true;
+        }
+        public static int?[,] RemoveNumber(int?[,] input_arr, int numbers_to_remove)
+        {
+            for (int i = numbers_to_remove; i >= 0; i--)
+            {
+                int row = new Random().Next(0, 9);
+                int column = new Random().Next(0, 9);
+                if (input_arr[row, column] != null) input_arr[row, column] = null;
+                else i++;
+            }
+            return input_arr;
         }
         public static bool NumberValid(int?[,] board, int row, int column, int? value)
         {

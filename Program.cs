@@ -17,12 +17,7 @@ namespace Assignments
 
             int?[,] SolvedBoard = Sudoku.SudokuFillTest();
 
-            for (int s = 0; s < 40; s++) //Remove upto 40 random numbers, might overlap remove
-            {
-                int i = new Random().Next(0, 9);
-                int j = new Random().Next(0, 9);
-                SolvedBoard[i, j] = null;
-            }
+            Sudoku.RemoveNumber(SolvedBoard, 40);
 
             for (int i = 0; i < 9; i++) //Print board with removed cells
             {
