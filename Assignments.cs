@@ -1380,8 +1380,9 @@ namespace Assignments
         }
         public static bool SudokuSolver(int?[,] arr, out int?[,] solvedBoard)
         {
+            //solvedBoard = (int?[,])  arr.Clone();
             solvedBoard = arr;
-            int?[] random_array = Other.RandomArray();
+            int?[] randomArray = Other.RandomArray();
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
@@ -1392,20 +1393,10 @@ namespace Assignments
                         for (int k = 0; k <= 8; k++)
                         {
                             
-                            if(NumberValid(arr, i, j, random_array[k]))
+                            if(NumberValid(arr, i, j, randomArray[k]))
                             {
 
-                                solvedBoard[i, j] = random_array[k];
-                                /*for (int l = 0; l < 9; l++) //Print board with removed cells
-                                {
-                                    for (int m = 0; m < 9; m++)
-                                    {
-                                        if (solvedBoard[l, m] == null) Console.Write(".");
-                                        else Console.Write(solvedBoard[l, m].ToString());
-                                    }
-                                    Console.WriteLine();
-                                }
-                                Console.WriteLine();*/
+                                solvedBoard[i, j] = randomArray[k];
                                 if (SudokuSolver(arr, out solvedBoard))
                                 {
                                     return true;
