@@ -980,12 +980,13 @@ namespace Assignments
         }
         public static int?[] RandomArray()
         {
+            Random rnd = new Random();
             int?[] arr = new int?[9];
             for (int i = 0; i < 9; i++)
             {
                 while (arr[i] == null)
                 {
-                    int k = new Random().Next(1, 10);
+                    int k = rnd.Next(1, 10);
                     if ((Array.Exists(arr, element => element == k)) == false)
                     {
                         arr[i] = k;
@@ -1413,14 +1414,16 @@ namespace Assignments
         }
         public static int?[,] removeNumber(int?[,] input_arr, int numbers_to_remove)
         {
+            int?[,] copy = (int?[,])input_arr.Clone();
+
             for (int i = numbers_to_remove; i > 0; i--)
             {
                 int row = new Random().Next(0, 9);
                 int column = new Random().Next(0, 9);
-                if (input_arr[row, column] != null) input_arr[row, column] = null;
+                if (copy[row, column] != null) copy[row, column] = null;
                 else i++;
             }
-            return input_arr;
+            return copy;
         }
         public static bool NumberValid(int?[,] board, int row, int column, int? value)
         {
@@ -1438,13 +1441,17 @@ namespace Assignments
         }
         public static int?[,] generateBoard()
         {
-            int?[,] board = SudokuFillTest();
+            int?[,] board = (int?[,])SudokuFillTest().Clone();
+            int?[,] boardClone = new int?[9, 9];
+            int tries = 1;
             bool boardFound = false;
             
             do
             {
-                int?[,] boardClone = (int?[,])board.Clone();
-                removeNumber(boardClone, 60);
+                boardClone = (int?[,])board.Clone();
+                boardClone = removeNumber(boardClone, 50);
+                Console.WriteLine($"Try number: {tries}");
+                tries++;
                 for (int i = 0; i < 9; i++) //Print final board
                 {
                     for (int j = 0; j < 9; j++)
@@ -1454,16 +1461,18 @@ namespace Assignments
                     }
                     Console.WriteLine();
                 }
-                if (solutionUnique(boardClone)) boardFound = true; board = boardClone;
+                if (solutionUnique(boardClone))
+                {
+                    boardFound = true;
+                    board = boardClone;
+                }
             } while (!boardFound);
             return board;
-
-
         }
         public static bool solutionUnique(int?[,] unsolved_arr)
         {
             
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 4; i++)
             {
                 int?[,] copy1 = (int?[,])unsolved_arr.Clone();
                 int?[,] copy2 = (int?[,])unsolved_arr.Clone();

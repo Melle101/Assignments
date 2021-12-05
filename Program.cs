@@ -16,7 +16,7 @@ namespace Assignments
             
 
             int?[,] board = Sudoku.generateBoard();
-
+            Console.WriteLine();
             for (int i = 0; i < 9; i++) //Print final board
             {
                 for (int j = 0; j < 9; j++)
