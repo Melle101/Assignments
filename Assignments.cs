@@ -1380,8 +1380,9 @@ namespace Assignments
         }
         public static bool SudokuSolver(int?[,] arr, out int?[,] solvedBoard)
         {
+            //solvedBoard = (int?[,])  arr.Clone();
             solvedBoard = arr;
-            int?[] random_array = Other.RandomArray();
+            int?[] randomArray = Other.RandomArray();
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
@@ -1392,20 +1393,10 @@ namespace Assignments
                         for (int k = 0; k <= 8; k++)
                         {
                             
-                            if(NumberValid(arr, i, j, random_array[k]))
+                            if(NumberValid(arr, i, j, randomArray[k]))
                             {
 
-                                solvedBoard[i, j] = random_array[k];
-                                /*for (int l = 0; l < 9; l++) //Print board with removed cells
-                                {
-                                    for (int m = 0; m < 9; m++)
-                                    {
-                                        if (solvedBoard[l, m] == null) Console.Write(".");
-                                        else Console.Write(solvedBoard[l, m].ToString());
-                                    }
-                                    Console.WriteLine();
-                                }
-                                Console.WriteLine();*/
+                                solvedBoard[i, j] = randomArray[k];
                                 if (SudokuSolver(arr, out solvedBoard))
                                 {
                                     return true;
@@ -1420,7 +1411,42 @@ namespace Assignments
             }
             return true;
         }
-        public static int?[,] RemoveNumber(int?[,] input_arr, int numbers_to_remove)
+
+        public static int?[,] removeNumberV2(int?[,] input_arr, int numbers_to_remove)
+        {
+            int start_row = 0;
+            int start_col = 0;
+
+            for (int i = 0; i < numbers_to_remove; i++)
+            {
+                bool number_removed;
+                do
+                {
+                    int target_row = new Random().Next(start_row, start_row + 3);
+                    int target_col = new Random().Next(start_col, start_col + 3);
+
+                    if (input_arr[target_row, target_col] != null)
+                    {
+                        input_arr[target_row, target_col] = null;
+                        number_removed = true;
+                    }
+                    else
+                    {
+                        i--;
+                        number_removed = false;
+                    }
+                } while (!number_removed);
+                if (start_col == 6)
+                {
+                    start_col = 0;
+                    start_row += 3;
+                }
+                else start_col += 3;
+                if (start_row >= 6) start_row = 0;
+            }
+            return input_arr;
+        }
+        public static int?[,] removeNumber(int?[,] input_arr, int numbers_to_remove)
         {
             for (int i = numbers_to_remove; i >= 0; i--)
             {
@@ -1443,6 +1469,19 @@ namespace Assignments
                 if (board[rowStart + (i % 3), colStart + (i / 3)] == value) return false;
             }
 
+            return true;
+        }
+        public static bool solutionUnique(int?[,] unsolved_arr)
+        {
+            int?[,] copy1 = (int?[,]) unsolved_arr.Clone();
+            int?[,] copy2 = (int?[,])unsolved_arr.Clone();
+            for (int i = 0; i < 5; i++)
+            {
+                Sudoku.SudokuSolver(copy1, out int?[,] arr);
+                Sudoku.SudokuSolver(copy2, out arr);
+
+                if (copy1 != copy2) return false;
+            }
             return true;
         }
     }

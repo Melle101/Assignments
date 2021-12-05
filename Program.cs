@@ -15,34 +15,55 @@ namespace Assignments
         {
             
 
-            int?[,] SolvedBoard = Sudoku.SudokuFillTest();
+            int?[,] unsolved_board = Sudoku.SudokuFillTest();
 
-            Sudoku.RemoveNumber(SolvedBoard, 40);
+            Sudoku.removeNumberV2(unsolved_board, 40);
+
+            int?[,] unsolvedClone = (int?[,]) unsolved_board.Clone();
 
             for (int i = 0; i < 9; i++) //Print board with removed cells
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    if (SolvedBoard[i, j] == null) Console.Write(".");
-                    else Console.Write(SolvedBoard[i, j].ToString());
+                    if (unsolved_board[i, j] == null) Console.Write(".");
+                    else Console.Write(unsolved_board[i, j].ToString());
                 }
                 Console.WriteLine();
             }
 
             Console.WriteLine("\n \n \n \n");
+
+            if (Sudoku.solutionUnique(unsolved_board)) Console.WriteLine("Unique solution.");
+            else Console.WriteLine("Multiple solutions.");
+
+                Console.WriteLine("\n \n \n \n");
             
 
-            Sudoku.SudokuSolver(SolvedBoard, out SolvedBoard);
+            Sudoku.SudokuSolver(unsolved_board, out int?[,] SolvedBoard);
             for (int i = 0; i < 9; i++) //Print final board
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    if (SolvedBoard[i, j] == null) Console.Write(".");
-                    else Console.Write(SolvedBoard[i, j].ToString());
+                    if (unsolved_board[i, j] == null) Console.Write(".");
+                    else Console.Write(unsolved_board[i, j].ToString());
                 }
                 Console.WriteLine();
             }
 
+            Console.WriteLine("\n \n \n \n");
+
+            Sudoku.SudokuSolver(unsolvedClone, out int?[,] SolvedBoard2);
+            for (int i = 0; i < 9; i++) //Print final board
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    if (unsolvedClone[i, j] == null) Console.Write(".");
+                    else Console.Write(unsolvedClone[i, j].ToString());
+                }
+                Console.WriteLine();
+            }
+
+            
 
             Console.ReadKey();
 
