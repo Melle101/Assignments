@@ -1411,44 +1411,9 @@ namespace Assignments
             }
             return true;
         }
-
-        public static int?[,] removeNumberV2(int?[,] input_arr, int numbers_to_remove)
-        {
-            int start_row = 0;
-            int start_col = 0;
-
-            for (int i = 0; i < numbers_to_remove; i++)
-            {
-                bool number_removed;
-                do
-                {
-                    int target_row = new Random().Next(start_row, start_row + 3);
-                    int target_col = new Random().Next(start_col, start_col + 3);
-
-                    if (input_arr[target_row, target_col] != null)
-                    {
-                        input_arr[target_row, target_col] = null;
-                        number_removed = true;
-                    }
-                    else
-                    {
-                        i--;
-                        number_removed = false;
-                    }
-                } while (!number_removed);
-                if (start_col == 6)
-                {
-                    start_col = 0;
-                    start_row += 3;
-                }
-                else start_col += 3;
-                if (start_row >= 6) start_row = 0;
-            }
-            return input_arr;
-        }
         public static int?[,] removeNumber(int?[,] input_arr, int numbers_to_remove)
         {
-            for (int i = numbers_to_remove; i >= 0; i--)
+            for (int i = numbers_to_remove; i > 0; i--)
             {
                 int row = new Random().Next(0, 9);
                 int column = new Random().Next(0, 9);
@@ -1471,16 +1436,55 @@ namespace Assignments
 
             return true;
         }
+        public static int?[,] generateBoard()
+        {
+            int?[,] board = SudokuFillTest();
+            bool boardFound = false;
+            
+            do
+            {
+                int?[,] boardClone = (int?[,])board.Clone();
+                removeNumber(boardClone, 60);
+                for (int i = 0; i < 9; i++) //Print final board
+                {
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if (boardClone[i, j] == null) Console.Write(".");
+                        else Console.Write(boardClone[i, j].ToString());
+                    }
+                    Console.WriteLine();
+                }
+                if (solutionUnique(boardClone)) boardFound = true; board = boardClone;
+            } while (!boardFound);
+            return board;
+
+
+        }
         public static bool solutionUnique(int?[,] unsolved_arr)
         {
-            int?[,] copy1 = (int?[,]) unsolved_arr.Clone();
-            int?[,] copy2 = (int?[,])unsolved_arr.Clone();
+            
             for (int i = 0; i < 5; i++)
             {
+                int?[,] copy1 = (int?[,])unsolved_arr.Clone();
+                int?[,] copy2 = (int?[,])unsolved_arr.Clone();
                 Sudoku.SudokuSolver(copy1, out int?[,] arr);
                 Sudoku.SudokuSolver(copy2, out arr);
 
-                if (copy1 != copy2) return false;
+                if (!arrayEqual(copy1, copy2)) return false;
+            }
+            return true;
+        }
+        public static bool arrayEqual(int?[,] arr1, int?[,] arr2)
+        {
+            if (arr1.GetLength(0) != arr2.GetLength(0)) return false;
+            if (arr1.GetLength(1) != arr2.GetLength(1)) return false;
+
+            for (int i = 0; i < arr1.GetLength(0); i++)
+            {
+                for (int j = 0; j < arr1.GetLength(1); j++)
+                {
+                    if (arr1[i, j] != arr2[i, j]) return false;
+                }
             }
             return true;
         }
