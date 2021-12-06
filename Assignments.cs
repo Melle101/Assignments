@@ -978,16 +978,16 @@ namespace Assignments
             }
             Console.WriteLine($"Medelvärdet är {sum / 10}.");
         }
+        static Random rand = new Random();
         public static int?[] RandomArray()
         {
-            Random rnd = new Random();
             int?[] arr = new int?[9];
             for (int i = 0; i < 9; i++)
             {
                 while (arr[i] == null)
                 {
-                    int k = rnd.Next(1, 10);
-                    if ((Array.Exists(arr, element => element == k)) == false)
+                    int k = rand.Next(1, 10);
+                    if (Sudoku.arrayContainsInteger(arr, k) == false)
                     {
                         arr[i] = k;
                     }
@@ -1425,6 +1425,28 @@ namespace Assignments
             }
             return copy;
         }
+        static Random rand = new Random();
+        public static int?[,] removeNumberV2(int?[,]input_arr, int numbers_to_remove)
+        {
+            while (numbers_to_remove > 0)
+            {
+                for (int i = 0; i <= 6; i += 3)
+                {
+                    for (int j = 0; j <= 6; j += 3)
+                    {
+                        int row = rand.Next(i, i + 3);
+                        int column = rand.Next(j, j + 3);
+                        if (input_arr[row, column] != null)
+                        {
+                            input_arr[row, column] = null;
+                            numbers_to_remove--;
+                        }
+                    }
+                }
+            }
+            return input_arr;
+
+        }
         public static bool NumberValid(int?[,] board, int row, int column, int? value)
         {
             int rowStart = (row / 3) * 3;
@@ -1449,7 +1471,7 @@ namespace Assignments
             do
             {
                 boardClone = (int?[,])board.Clone();
-                boardClone = removeNumber(boardClone, 65);
+                boardClone = removeNumberV2(boardClone, 65);
                 Console.WriteLine($"Try number: {tries}");
                 tries++;
                 for (int i = 0; i < 9; i++) //Print final board
@@ -1472,7 +1494,7 @@ namespace Assignments
         public static bool solutionUnique(int?[,] unsolved_arr)
         {
             
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 1; i++)
             {
                 int?[,] copy1 = (int?[,])unsolved_arr.Clone();
                 int?[,] copy2 = (int?[,])unsolved_arr.Clone();
@@ -1496,6 +1518,14 @@ namespace Assignments
                 }
             }
             return true;
+        }
+        public static bool arrayContainsInteger(int?[] arr, int value)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] == value) return true;
+            }
+            return false;
         }
     }
 }
