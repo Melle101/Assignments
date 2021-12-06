@@ -1449,7 +1449,7 @@ namespace Assignments
             do
             {
                 boardClone = (int?[,])board.Clone();
-                boardClone = removeNumber(boardClone, 50);
+                boardClone = removeNumber(boardClone, 65);
                 Console.WriteLine($"Try number: {tries}");
                 tries++;
                 for (int i = 0; i < 9; i++) //Print final board
