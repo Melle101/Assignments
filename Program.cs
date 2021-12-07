@@ -13,7 +13,7 @@ namespace Assignments
     {
         static void Main(string[] args)
         {
-            
+
 
             int?[,] board = Sudoku.generateBoard();
             Console.WriteLine();

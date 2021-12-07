@@ -1311,6 +1311,65 @@ namespace Assignments
                 else Console.WriteLine("Du angav inte en siffra");
             }
         }
+        public static void Prov1()
+        {
+            int value = new Random().Next(1, 101); //101 Eftersom random ger som högst övre gräns - 1.
+            Console.Write("Du ska gissa på ett heltal mellan 1 och 100, du har 5 gissningar. \nGissning nr 1: ");
+            int guess = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (guess == value)
+                {
+                    Console.WriteLine($"Bra jobbat, talet var {value}.");
+                    break;
+                }
+                string highOrLow = guess >= value ? "högt" : "lågt";
+                Console.Write($"Du gissade för {highOrLow}, gissa igen: ");
+                guess = int.Parse(Console.ReadLine());
+            }
+            if (guess != value) Console.WriteLine($"Dinna gissningar tog slut, talet var {value}");
+        }
+        public static void Prov2()
+        {
+            int value = new Random().Next(1, 101); //101 Eftersom random ger som högst övre gräns - 1.
+            Console.Write("Du ska gissa på ett heltal mellan 1 och 100, du har 5 gissningar. \nGissning nr 1: ");
+            int guess = int.Parse(Console.ReadLine());
+
+            for (int i = 1; i < 5; i++)
+            {
+                if (guess == value)
+                {
+                    Console.WriteLine($"Bra jobbat, talet var {value}."); //Uppgift 3: Console.WriteLine($"Bra jobbat, det tog dig {i} gånger att gissa rätt på {value}.");
+                    break;
+                }
+                string highOrLow = guess > value ? "högt" : "lågt";
+                Console.Write($"Gissning nr {i + 1 }, du gissade för {highOrLow}, gissa igen: ");
+                guess = int.Parse(Console.ReadLine());
+            }
+            if (guess != value) Console.WriteLine($"Dina gissningar tog slut, talet var {value}");
+        }
+        public static void Prov3()
+        {
+            int value = new Random().Next(1, 101); //101 Eftersom random ger som högst övre gräns - 1.
+            Console.Write("Du ska gissa på ett heltal mellan 1 och 100, du har 5 gissningar. \nGissning nr 1: ");
+            int guess = int.Parse(Console.ReadLine());
+
+            for (int i = 1; i < 5; i++)
+            {
+                if (guess == value)
+                {
+                    string gångOrGånger = i == 1 ? "gång" : "gånger";
+                    Console.WriteLine($"Bra jobbat, det tog dig {i} {gångOrGånger} att gissa rätt på {value}.");
+                    break;
+                }
+                string highOrLow = guess > value ? "högt" : "lågt";
+                Console.Write($"Gissning nr {i + 1 }, du gissade för {highOrLow}, gissa igen: ");
+                guess = int.Parse(Console.ReadLine());
+            }
+            if (guess != value) Console.WriteLine($"Dina gissningar tog slut, talet var {value}");
+        }
+
     }
     public class Sudoku
     {
@@ -1379,9 +1438,8 @@ namespace Assignments
             }
             return SolvedBoard;
         }
-        public static bool SudokuSolver(int?[,] arr, out int?[,] solvedBoard)
+        public static bool SudokuSolverRandom(int?[,] arr, out int?[,] solvedBoard)
         {
-            //solvedBoard = (int?[,])  arr.Clone();
             solvedBoard = arr;
             int?[] randomArray = Other.RandomArray();
             for (int i = 0; i < 9; i++)
@@ -1390,14 +1448,43 @@ namespace Assignments
                 {
                     if (solvedBoard[i, j] == null)
                     {
-                        
+
                         for (int k = 0; k <= 8; k++)
                         {
-                            
-                            if(NumberValid(arr, i, j, randomArray[k]))
+
+                            if (NumberValid(arr, i, j, randomArray[k]))
                             {
 
                                 solvedBoard[i, j] = randomArray[k];
+                                if (SudokuSolverRandom(arr, out solvedBoard))
+                                {
+                                    return true;
+                                }
+                                else solvedBoard[i, j] = null;
+
+                            }
+                        }
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        public static bool SudokuSolver(int?[,] arr, out int?[,] solvedBoard)
+        {            solvedBoard = arr;
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    if (solvedBoard[i, j] == null)
+                    {
+                        for (int k = 1; k <= 9; k++)
+                        {
+
+                            if (NumberValid(arr, i, j, k))
+                            {
+
+                                solvedBoard[i, j] = k;
                                 if (SudokuSolver(arr, out solvedBoard))
                                 {
                                     return true;
@@ -1406,13 +1493,43 @@ namespace Assignments
 
                             }
                         }
-                       return false;
+                        return false;
                     }
                 }
             }
             return true;
         }
-        public static int?[,] removeNumber(int?[,] input_arr, int numbers_to_remove)
+        public static bool SudokuSolverReverse(int?[,] arr, out int?[,] solvedBoard)
+        {
+            solvedBoard = arr;
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    if (solvedBoard[i, j] == null)
+                    {
+                        for (int k = 9; k >= 1; k--)
+                        {
+
+                            if (NumberValid(arr, i, j, k))
+                            {
+
+                                solvedBoard[i, j] = k;
+                                if (SudokuSolver(arr, out solvedBoard))
+                                {
+                                    return true;
+                                }
+                                else solvedBoard[i, j] = null;
+
+                            }
+                        }
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        public static int?[,] removeNumberRandom(int?[,] input_arr, int numbers_to_remove)
         {
             int?[,] copy = (int?[,])input_arr.Clone();
 
@@ -1445,11 +1562,11 @@ namespace Assignments
             int?[,] boardClone = new int?[9, 9];
             int tries = 1;
             bool boardFound = false;
-            
+
             do
             {
                 boardClone = (int?[,])board.Clone();
-                boardClone = removeNumber(boardClone, 65);
+                boardClone = removeNumberRandom(boardClone, 60);
                 Console.WriteLine($"Try number: {tries}");
                 tries++;
                 for (int i = 0; i < 9; i++) //Print final board
@@ -1471,16 +1588,12 @@ namespace Assignments
         }
         public static bool solutionUnique(int?[,] unsolved_arr)
         {
-            
-            for (int i = 0; i < 4; i++)
-            {
-                int?[,] copy1 = (int?[,])unsolved_arr.Clone();
-                int?[,] copy2 = (int?[,])unsolved_arr.Clone();
-                Sudoku.SudokuSolver(copy1, out int?[,] arr);
-                Sudoku.SudokuSolver(copy2, out arr);
+            int?[,] copy1 = (int?[,])unsolved_arr.Clone();
+            int?[,] copy2 = (int?[,])unsolved_arr.Clone();
+            Sudoku.SudokuSolver(copy1, out int?[,] arr);
+            Sudoku.SudokuSolverReverse(copy2, out arr);
 
-                if (!arrayEqual(copy1, copy2)) return false;
-            }
+            if (!arrayEqual(copy1, copy2)) return false;
             return true;
         }
         public static bool arrayEqual(int?[,] arr1, int?[,] arr2)
@@ -1499,6 +1612,7 @@ namespace Assignments
         }
     }
 }
+    
 
 
     
