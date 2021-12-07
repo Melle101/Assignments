@@ -1542,6 +1542,28 @@ namespace Assignments
             }
             return copy;
         }
+        static Random rand = new Random();
+        public static int?[,] removeNumberV2(int?[,]input_arr, int numbers_to_remove)
+        {
+            while (numbers_to_remove > 0)
+            {
+                for (int i = 0; i <= 6; i += 3)
+                {
+                    for (int j = 0; j <= 6; j += 3)
+                    {
+                        int row = rand.Next(i, i + 3);
+                        int column = rand.Next(j, j + 3);
+                        if (input_arr[row, column] != null)
+                        {
+                            input_arr[row, column] = null;
+                            numbers_to_remove--;
+                        }
+                    }
+                }
+            }
+            return input_arr;
+
+        }
         public static bool NumberValid(int?[,] board, int row, int column, int? value)
         {
             int rowStart = (row / 3) * 3;
@@ -1609,6 +1631,14 @@ namespace Assignments
                 }
             }
             return true;
+        }
+        public static bool arrayContainsInteger(int?[] arr, int value)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] == value) return true;
+            }
+            return false;
         }
     }
 }
