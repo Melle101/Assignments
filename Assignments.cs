@@ -987,7 +987,7 @@ namespace Assignments
                 while (arr[i] == null)
                 {
                     int k = rand.Next(1, 10);
-                    if (Sudoku.arrayContainsInteger(arr, k) == false)
+                    if ((Array.Exists(arr, element => element == k)) == false)
                     {
                         arr[i] = k;
                     }
