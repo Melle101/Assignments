@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 /*
 Uppgifter i Assignments.cs använd t.ex KaggVariabler.Uppgift1(); för att köra uppgift.
@@ -15,8 +17,7 @@ namespace Assignments
         {
 
 
-            int?[,] board = Sudoku.generateBoard();
-            Console.WriteLine();
+            Console.WriteLine("Valid board!:");
             for (int i = 0; i < 9; i++) //Print final board
             {
                 for (int j = 0; j < 9; j++)
