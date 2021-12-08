@@ -28,10 +28,7 @@ namespace Assignments
                 Console.WriteLine();
             }
 
-
-
             Console.ReadKey();
-
         }  
     }
 }

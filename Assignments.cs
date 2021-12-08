@@ -1545,21 +1545,20 @@ namespace Assignments
         static Random rand = new Random();
         public static int?[,] removeNumberV2(int?[,]input_arr, int numbers_to_remove)
         {
-            while (numbers_to_remove > 0)
+            int upperBound = 3;
+            for (int i = numbers_to_remove; i > 0; i--)
             {
-                for (int i = 0; i <= 6; i += 3)
+                int cell = new Random().Next(upperBound - 3, upperBound);
+                int row = cell / 9;
+                int col = cell % 9;
+                if (input_arr[row, col] != null)
                 {
-                    for (int j = 0; j <= 6; j += 3)
-                    {
-                        int row = rand.Next(i, i + 3);
-                        int column = rand.Next(j, j + 3);
-                        if (input_arr[row, column] != null)
-                        {
-                            input_arr[row, column] = null;
-                            numbers_to_remove--;
-                        }
-                    }
+                    input_arr[row, col] = null;
                 }
+                else i++;
+
+                if (upperBound == 81) upperBound = 3;
+                else upperBound += 3;
             }
             return input_arr;
 
@@ -1588,7 +1587,7 @@ namespace Assignments
             do
             {
                 boardClone = (int?[,])board.Clone();
-                boardClone = removeNumberRandom(boardClone, 60);
+                boardClone = removeNumberV2(boardClone, 57);
                 Console.WriteLine($"Try number: {tries}");
                 tries++;
                 for (int i = 0; i < 9; i++) //Print final board
