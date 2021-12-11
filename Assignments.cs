@@ -1561,8 +1561,56 @@ namespace Assignments
                 else upperBound += 3;
             }
             return input_arr;
+        }
+        public static int?[,] removeNumberV3(int?[,]input_arr, int numbers_to_remove)
+        {
+            int[] oneOptionCells = new int[81];
+            for (int i = 0; i < 81; i++) oneOptionCells[i] = i;
+            int cell, row, col;
+            do
+            {
+                oneOptionCells = updateOneOptionCells(input_arr, oneOptionCells);
+                cell = oneOptionCells[rand.Next(0, oneOptionCells.Length)];
+                row = cell / 9;
+                col = cell % 9;
+                input_arr[row, col] = null;
+
+            } while (oneOptionCells.Length > 0);
+            return input_arr;
 
         }
+        public static int[] updateOneOptionCells(int?[,] board, int[] oneOptionCells)
+        {
+            for (int i = 0; i < oneOptionCells.Length; i++)
+            {
+                if (countNumbersValid(board, oneOptionCells[i]) >= 1)
+                {
+                    oneOptionCells = removeInArray(oneOptionCells, i);
+                }
+                else oneOptionCells[i] = i;
+            }
+            return oneOptionCells;
+        }
+        public static int countNumbersValid(int?[,] input_arr, int cell)
+        {
+            int count = 0;
+            int row = cell / 9;
+            int col = cell % 9;
+            for (int i = 0; i < 9; i++)
+            {
+                if (NumberValid(input_arr, row, col, i)) count++;
+            }
+
+            return count;
+        }
+        public static int[] removeInArray(int[] input_arr, int position)
+        {
+            List<int> nums = new List<int>(input_arr);
+            nums.RemoveRange(position, 1);
+            input_arr = nums.ToArray();
+            return input_arr;
+        }
+
         public static bool NumberValid(int?[,] board, int row, int column, int? value)
         {
             int rowStart = (row / 3) * 3;
@@ -1587,7 +1635,7 @@ namespace Assignments
             do
             {
                 boardClone = (int?[,])board.Clone();
-                boardClone = removeNumberV2(boardClone, 57);
+                boardClone = removeNumberV3(boardClone, 57);
                 Console.WriteLine($"Try number: {tries}");
                 tries++;
                 for (int i = 0; i < 9; i++) //Print final board
