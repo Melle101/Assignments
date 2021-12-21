@@ -1622,7 +1622,7 @@ namespace Assignments
 
             return true;
         }
-        public static int?[,] generateBoard()
+        public static int?[,] generateBoard(int emptyCells)
         {
             int?[,] board = (int?[,])SudokuFillTest().Clone();
             int?[,] boardClone = new int?[9, 9];
@@ -1632,7 +1632,7 @@ namespace Assignments
             do
             {
                 boardClone = (int?[,])board.Clone();
-                boardClone = removeNumberRandom(boardClone, 57);
+                boardClone = removeNumberV2(boardClone, emptyCells);
                 Console.WriteLine($"Try number: {tries}");
                 tries++;
                 for (int i = 0; i < 9; i++) //Print final board
@@ -1649,7 +1649,7 @@ namespace Assignments
                     boardFound = true;
                     board = boardClone;
                 }
-                /*if (countCells(boardClone) <= (81 - 30))
+                /*if (countCells(boardClone) <= (81 - emptyCells))
                 {
                     boardFound = true;
                     board = boardClone;
@@ -1673,11 +1673,11 @@ namespace Assignments
         {
             int?[,] copy1 = (int?[,])unsolved_arr.Clone();
             int?[,] copy2 = (int?[,])unsolved_arr.Clone();
-            Sudoku.SudokuSolver(copy1, out int?[,] arr);
-            Sudoku.SudokuSolverReverse(copy2, out arr);
+            Sudoku.SudokuSolver(copy1, out copy1);
+            Sudoku.SudokuSolverReverse(copy2, out copy2);
 
-            if (!arrayEqual(copy1, copy2)) return false;
-            return true;
+            if (arrayEqual(copy1, copy2) && gridFull(copy1)) return true;
+            return false;
         }
         public static bool arrayEqual(int?[,] arr1, int?[,] arr2)
         {
@@ -1700,6 +1700,38 @@ namespace Assignments
                 if (arr[i] == value) return true;
             }
             return false;
+        }
+        public static bool gridFull(int?[,] board)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    if (board[i, j] == null) return false;
+                }
+            }
+            return true;
+        }
+        public static int?[,] generateBoardV2(int emptyCells)
+        {
+            int?[,] board = new int?[9, 9];
+            int i = 0;
+
+            while (true)
+            {
+                Console.WriteLine($"Try nr. {i++}.");
+                while (81 - emptyCells >= 0)
+                {
+                    int Cell = rand.Next(0, 81);
+                    int potentialNumber = rand.Next(1, 10);
+                    if (board[Cell / 9, Cell % 9] == null && NumberValid(board, Cell / 9, Cell % 9, potentialNumber))
+                    {
+                        board[Cell / 9, Cell % 9] = potentialNumber;
+                        emptyCells++;
+                    }
+                }
+                if (solutionUnique(board)) return board;
+            }
         }
     }
 }
