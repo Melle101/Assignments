@@ -946,7 +946,7 @@ namespace Assignments
             Console.WriteLine(Output);
         }
     }
-    class Other
+    public static class Other
     {
         public static void Kroppkakeuppgiften()
         {
@@ -1369,7 +1369,119 @@ namespace Assignments
             }
             if (guess != value) Console.WriteLine($"Dina gissningar tog slut, talet var {value}");
         }
+        public static void Projekt2()
+        {
+            string[] tables = new string[8];
+            string choice = "";
+            Console.WriteLine("Detta är Centralrestaurangens bordshanterare");
+            if (!File.Exists("Bord.txt"))
+            {
+                for (int i = 1; i <= 8; i++)
+                {
+                    tables[i - 1] = $"Bord {i} - Tomt";
+                }
+                File.WriteAllLines("Bord.txt", tables);
+                Console.WriteLine("Hittade ingen sparad fil, skapade en ny.");
+            }
+            else
+            {
+                tables = File.ReadAllLines("Bord.txt");
+                Console.WriteLine("Information lästes in från sparad fil.");
+            }
 
+            while (choice != "5")
+            {
+                Console.WriteLine("\nMeny: \n1. Lista alla bord \n2. Lägg till eller ändra bordsinformation \n3. Markera att ett bord är tomt \n4. Töm alla bord \n5. Avsulta programmet");
+                choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        foreach (string row in tables)
+                        {
+                            Console.WriteLine(row);
+                        }
+                        break;
+
+                    case "2":
+                        Console.Write("Bordnummer: ");
+                        if (!Int32.TryParse(Console.ReadLine(), out int tableNumber))
+                        {
+                            Console.WriteLine("Ange en siffra 1-8 för att välja bord.");
+                            break;
+                        }
+                        Console.Write("Antal gäster vid bordet: ");
+                        if (!Int32.TryParse(Console.ReadLine(), out int guests))
+                        {
+                            Console.WriteLine("Ange en siffra för antal gäster");
+                            break;
+                        }
+                        Console.Write("Namn: ");
+                        string name = Console.ReadLine();
+                        tables[tableNumber - 1] = $"Bord {tableNumber} - Gäster: {guests}, Namn: {name}";
+                        File.WriteAllLines("Bord.txt", tables);
+                        break;
+
+                    case "3":
+                        Console.Write("Bordnummer: ");
+                        if (!Int32.TryParse(Console.ReadLine(), out int tableNumber2))
+                        {
+                            Console.WriteLine("Ange en siffra 1-8 för att välja bord.");
+                            break;
+                        }
+                        tables[tableNumber2 - 1] = $"Bord {tableNumber2} - Tomt";
+                        File.WriteAllLines("Bord.txt", tables);
+                        break;
+
+                    case "4":
+                        for (int i = 1; i <= 8; i++)
+                        {
+                            tables[i - 1] = $"Bord {i} - Tomt";
+                        }
+                        File.WriteAllLines("Bord.txt", tables);
+                        break;
+
+                    case "5":
+                        break;
+
+                    default:
+                        Console.WriteLine("Ange en siffra 1-5 för att välja.");
+                        break;
+                }
+            }
+        }
+    }
+    public static class Projekt3Class
+    {
+        public static void Projekt3()
+        {
+            char[,] playerBoard = new char[9, 9];
+            Fill2DArray(playerBoard, '-');
+            char[,] computerBoard = new char[9, 9];
+            Fill2DArray(computerBoard, '-');
+            Print2DArray(playerBoard);
+        }
+        public static void Fill2DArray(this Array arr, object value)
+        {
+            for (int i = 0; i < arr.GetLength(0) - 1; i++)
+            {
+                for (int j = 0; j < arr.GetLength(1) - 1; j++)
+                {
+                    arr.SetValue('-', i, j);
+                }
+            }
+        }
+        public static void Print2DArray(this Array arr)
+        {
+            for (int i = 0; i < arr.GetLength(0) - 1; i++)
+            {
+                for (int j = 0; j < arr.GetLength(1) - 1; j++)
+                {
+                    Console.Write(arr.GetValue(i, j));
+                }
+                Console.WriteLine();
+            }
+        }
     }
     public class Sudoku
     {

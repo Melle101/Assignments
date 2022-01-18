@@ -16,7 +16,7 @@ namespace Assignments
         static void Main(string[] args)
         {
 
-            int?[,] board = Sudoku.generateBoardV2(57);
+            /*int?[,] board = Sudoku.generateBoardV2(57);
             Console.WriteLine("Valid board!:");
             for (int i = 0; i < 9; i++) //Print final board
             {
@@ -29,7 +29,9 @@ namespace Assignments
             }
             if (Sudoku.solutionUnique(board)) Console.WriteLine("Unique");
             else Console.WriteLine("IDK");
-            Console.ReadKey();
+            Console.ReadKey();*/
+
+            Projekt3Class.Projekt3();
         }  
     }
 }
