@@ -1459,7 +1459,74 @@ namespace Assignments
             Fill2DArray(playerBoard, '-');
             char[,] computerBoard = new char[9, 9];
             Fill2DArray(computerBoard, '-');
+
+            Console.WriteLine("Welcome to BattleShips! \nThis is your board: ");
             Print2DArray(playerBoard);
+            Console.WriteLine("Press enter to place out your ships!");
+            Console.ReadKey();
+            Console.Clear();
+            PlaceShip(playerBoard, 5);
+            PlaceShip(playerBoard, 4);
+            PlaceShip(playerBoard, 3);
+            PlaceShip(playerBoard, 3);
+            PlaceShip(playerBoard, 2);
+            Console.WriteLine("You have placed all your 5 ships, this is your finsihed board!:");
+            Print2DArray(playerBoard);
+
+
+
+        }
+        public static void PlaceShip(this Array arr, int ShipSize)
+        {
+            Console.Clear();
+            bool ShipPlaced = false;
+            Console.WriteLine($"Place the {ShipSize}-size ship by entering x and y values for both ends of the ship!");
+            Console.WriteLine("It is only allowed to place the ship horzontally or vertically, not diagonally. (1, 1)  is top left corner.");
+            Console.WriteLine("This is your current board: ");
+            Print2DArray(arr);
+
+            do
+            {
+                Console.Write("First X-value: ");
+                int FirstX = int.Parse(Console.ReadLine()) - 1;
+                Console.Write("First Y-value: ");
+                int FirstY = int.Parse(Console.ReadLine()) - 1;
+                Console.Write("Second X-value: ");
+                int SecondX = int.Parse(Console.ReadLine()) - 1;
+                Console.Write("Second Y-value: ");
+                int SecondY = int.Parse(Console.ReadLine()) - 1;
+                if (Math.Sqrt(Math.Pow(SecondX - FirstX, 2) + Math.Pow(SecondY - FirstY, 2)) == ShipSize)
+                {
+                    int LargestY = FirstY <= SecondY ? FirstY : SecondY;
+                    if (SecondX - FirstX == 0)
+                    {
+                        for (int i = LargestY; i < LargestY + ShipSize; i++)
+                        {
+                            arr.SetValue('O', FirstX, i);
+                        }
+                    };
+                    int LargestX = FirstX <= SecondX ? FirstX : SecondX;
+                    if (SecondY - FirstY == 0)
+                    {
+                        for (int i = LargestX; i < LargestX + ShipSize; i++)
+                        {
+                             arr.SetValue('O', i, FirstY);
+                        }
+                    }
+                    Console.WriteLine("This is your board now: ");
+                    Print2DArray(arr);
+                    Console.WriteLine("Are you happy with this ships' placement? [Y/N]");
+                    if (Console.ReadLine().ToLower() == "y") ShipPlaced = true;
+                    else Console.WriteLine("Place out the ship again.");
+                }
+                else
+                {
+                    Console.WriteLine("Coordinates were not valid, try again.");
+                }
+            } while (ShipPlaced == false);
+
+
+
         }
         public static void Fill2DArray(this Array arr, object value)
         {
@@ -1467,7 +1534,7 @@ namespace Assignments
             {
                 for (int j = 0; j < arr.GetLength(1) - 1; j++)
                 {
-                    arr.SetValue('-', i, j);
+                    arr.SetValue(value, i, j);
                 }
             }
         }
@@ -1477,10 +1544,23 @@ namespace Assignments
             {
                 for (int j = 0; j < arr.GetLength(1) - 1; j++)
                 {
+                    switch (arr.GetValue(i, j))
+                    {
+                        case '-':
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            break;
+                        case 'O':
+                            Console.ForegroundColor = ConsoleColor.DarkGray;
+                            break;
+                        case 'X':
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            break;
+                    }
                     Console.Write(arr.GetValue(i, j));
                 }
                 Console.WriteLine();
             }
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
     public class Sudoku
