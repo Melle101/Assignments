@@ -1450,6 +1450,67 @@ namespace Assignments
                 }
             }
         }
+        public static void Exempelprov()
+        {
+            int[] numbers = new int[10];
+            Console.WriteLine("Alla talen: ");
+            for (int i = 0; i < 10; i++)
+            {
+                numbers[i] = new Random().Next(100, 1000);
+                Console.Write($"{numbers[i]} ");
+            }
+
+            Console.WriteLine("\n\nTalen i omvänd ordning: ");
+            for (int i = 9; i >= 0; i--)
+            {
+                Console.Write($"{numbers[i]} ");
+            }
+
+            Console.WriteLine("\n\nTalen omvänt där 0 visar jämnt tal och 1 ojämnt:");
+            int[] numbersOddOrEven = new int[10];
+            for (int i = 9; i >= 0; i--)
+            {
+                numbersOddOrEven[i] = numbers[i] % 2;
+                Console.Write($"{numbersOddOrEven[i]} ");
+            }
+        }
+        public static void Uppgift523()
+        {
+            int[] arr = { 1, 2, 2, 3, 3, 4};
+
+            int highestNumber = 0;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] > highestNumber)
+                {
+                    highestNumber = arr[i];
+                }
+            }
+
+            int[] numberCount = new int[highestNumber + 1];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                numberCount[arr[i]]++;
+            }
+
+            int highestCount = 0;
+            for (int i = 0; i < numberCount.Length; i++)
+            {
+                if (numberCount[i] > highestCount)
+                {
+                    highestCount = arr[i];
+                }
+            }
+
+            Console.WriteLine("Highest numbers: ");
+            for (int i = 0; i < numberCount.Length; i++)
+            {
+                if (numberCount[i] == highestCount)
+                {
+                    Console.WriteLine(i);
+                }
+            }
+        }
     }
     public static class Projekt3Class
     {
@@ -1495,14 +1556,14 @@ namespace Assignments
                 int SecondX = int.Parse(Console.ReadLine()) - 1;
                 Console.Write("Second Y-value: ");
                 int SecondY = int.Parse(Console.ReadLine()) - 1;
-                if (Math.Sqrt(Math.Pow(SecondX - FirstX, 2) + Math.Pow(SecondY - FirstY, 2)) == ShipSize)
+                if (Math.Sqrt(Math.Pow(SecondX - FirstX, 2) + Math.Pow(SecondY - FirstY, 2)) == ShipSize - 1)
                 {
                     int LargestY = FirstY <= SecondY ? FirstY : SecondY;
                     if (SecondX - FirstX == 0)
                     {
                         for (int i = LargestY; i < LargestY + ShipSize; i++)
                         {
-                            arr.SetValue('O', FirstX, i);
+                            arr.SetValue('O', i, FirstX);
                         }
                     };
                     int LargestX = FirstX <= SecondX ? FirstX : SecondX;
@@ -1510,7 +1571,7 @@ namespace Assignments
                     {
                         for (int i = LargestX; i < LargestX + ShipSize; i++)
                         {
-                             arr.SetValue('O', i, FirstY);
+                             arr.SetValue('O', FirstY, i);
                         }
                     }
                     Console.WriteLine("This is your board now: ");

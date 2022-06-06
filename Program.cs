@@ -31,7 +31,7 @@ namespace Assignments
             else Console.WriteLine("IDK");
             Console.ReadKey();*/
 
-            Projekt3Class.Projekt3();
+            Other.Uppgift523();
         }  
     }
 }
